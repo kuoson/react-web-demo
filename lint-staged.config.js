@@ -1,3 +1,3 @@
 export default {
-  'src/**/*.{js,ts,jsx,tsx}': ['npm run lint', 'npm run format', 'git add .'],
+  'src/**/*.{js,ts,jsx,tsx}': ['npm run format', 'npm run lint', 'git add'],
 }
