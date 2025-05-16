@@ -7,6 +7,11 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons'
 import { Button, Space, Divider } from 'antd'
+import {
+  MANAGE_LIST_PATHNAME,
+  MANAGE_STAR_PATHNAME,
+  MANAGE_TRASH_PATHNAME,
+} from '@/router/routes'
 import styles from './ManageLayout.module.scss'
 
 const ManageLayout: FC = () => {
@@ -23,27 +28,27 @@ const ManageLayout: FC = () => {
           <Divider />
           <Button
             icon={<UnorderedListOutlined />}
-            type={pathname === '/manage/list' ? 'default' : 'text'}
+            type={pathname === MANAGE_LIST_PATHNAME ? 'default' : 'text'}
             onClick={() => {
-              nav('/manage/list')
+              nav(MANAGE_LIST_PATHNAME)
             }}
           >
             我的问卷
           </Button>
           <Button
             icon={<StarOutlined />}
-            type={pathname === '/manage/star' ? 'default' : 'text'}
+            type={pathname === MANAGE_STAR_PATHNAME ? 'default' : 'text'}
             onClick={() => {
-              nav('/manage/star')
+              nav(MANAGE_STAR_PATHNAME)
             }}
           >
             星标问卷
           </Button>
           <Button
             icon={<DeleteOutlined />}
-            type={pathname === '/manage/trash' ? 'default' : 'text'}
+            type={pathname === MANAGE_TRASH_PATHNAME ? 'default' : 'text'}
             onClick={() => {
-              nav('/manage/trash')
+              nav(MANAGE_TRASH_PATHNAME)
             }}
           >
             回收站

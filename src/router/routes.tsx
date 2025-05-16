@@ -16,42 +16,61 @@ import Trash from '@/pages/manage/Trash'
 import Edit from '@/pages/question/Edit'
 import Stat from '@/pages/question/Stat'
 
+const getPathSegment = (path: string, index: number) => {
+  if (path === '/') {
+    return '/'
+  }
+
+  const segments = path.split('/').filter(Boolean)
+  if (index < 0 || index >= segments.length) {
+    return ''
+  }
+  return segments[index]
+}
+
+const HOME_PATHNAME = '/'
+const LOGIN_PATHNAME = '/login'
+const REGISTER_PATHNAME = '/register'
+const MANAGE_LIST_PATHNAME = '/manage/list'
+const MANAGE_STAR_PATHNAME = '/manage/star'
+const MANAGE_TRASH_PATHNAME = '/manage/trash'
+
 const routes: Route[] = [
   {
     path: '/',
     element: <MainLayout />,
     children: [
       {
-        path: '/',
+        path: getPathSegment(HOME_PATHNAME, 0),
         element: <Home />,
         meta: { title: 'Home' },
       },
       {
-        path: 'login',
+        path: getPathSegment(LOGIN_PATHNAME, 0),
         element: <Login />,
         meta: { title: 'Login' },
       },
       {
-        path: 'register',
+        path: getPathSegment(REGISTER_PATHNAME, 0),
         element: <Register />,
         meta: { title: 'Register' },
       },
       {
-        path: 'manage',
+        path: getPathSegment(MANAGE_LIST_PATHNAME, 0),
         element: <ManageLayout />,
         children: [
           {
-            path: 'list',
+            path: getPathSegment(MANAGE_LIST_PATHNAME, 1),
             element: <List />,
             meta: { title: 'List' },
           },
           {
-            path: 'star',
+            path: getPathSegment(MANAGE_STAR_PATHNAME, 1),
             element: <Star />,
             meta: { title: 'Star' },
           },
           {
-            path: 'trash',
+            path: getPathSegment(MANAGE_TRASH_PATHNAME, 1),
             element: <Trash />,
             meta: { title: 'Trash' },
           },
@@ -82,4 +101,12 @@ const routes: Route[] = [
   },
 ]
 
+export {
+  HOME_PATHNAME,
+  LOGIN_PATHNAME,
+  REGISTER_PATHNAME,
+  MANAGE_LIST_PATHNAME,
+  MANAGE_STAR_PATHNAME,
+  MANAGE_TRASH_PATHNAME,
+}
 export default routes
