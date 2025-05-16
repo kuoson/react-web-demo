@@ -1,79 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom'
-import MainLayout from '@/layouts/MainLayout'
-import ManageLayout from '@/layouts/ManageLayout'
-import QuestionLayout from '@/layouts/QuestionLayout'
+import type { Route } from './routesType'
+import routes from './routes'
+import PageWrapper from '@/components/PageWrapper'
 
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import Register from '@/pages/Register'
-import NotFound from '@/pages/NotFound'
+const wrapRoutesWithPageWrapper = (routes: Route[]) => {
+  return routes.map((route) => {
+    const wrappedRoute = {
+      ...route,
+      element: route?.meta?.title ? (
+        <PageWrapper title={route?.meta?.title}>{route.element}</PageWrapper>
+      ) : (
+        route.element
+      ),
+    }
 
-import List from '@/pages/manage/List'
-import Star from '@/pages/manage/Star'
-import Trash from '@/pages/manage/Trash'
+    if (route.children) {
+      wrappedRoute.children = wrapRoutesWithPageWrapper(route.children)
+    }
 
-import Edit from '@/pages/question/Edit'
-import Stat from '@/pages/question/Stat'
+    return wrappedRoute
+  })
+}
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'register',
-        element: <Register />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'manage',
-        element: <ManageLayout />,
-        children: [
-          {
-            path: 'list',
-            element: <List />,
-          },
-          {
-            path: 'star',
-            element: <Star />,
-          },
-          {
-            path: 'trash',
-            element: <Trash />,
-          },
-        ],
-      },
-      {
-        path: '*', // 最后，用于兜底
-        element: <NotFound />,
-      },
-    ],
-  },
-  {
-    path: 'question',
-    element: <QuestionLayout />,
-    children: [
-      {
-        path: 'edit/:id',
-        element: <Edit />,
-      },
-      {
-        path: 'stat/:id',
-        element: <Stat />,
-      },
-    ],
-  },
-])
+const router = createBrowserRouter(wrapRoutesWithPageWrapper(routes))
 
 export default router
