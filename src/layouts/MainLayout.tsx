@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import Logo from '@/components/Logo'
+import UserInfo from '@/components/UserInfo'
 import styles from './MainLayout.module.scss'
 
 const { Header, Content, Footer } = Layout
@@ -9,8 +10,9 @@ const { Header, Content, Footer } = Layout
 const MainLayout: FC = () => {
   return (
     <Layout>
-      <Header>
+      <Header className={styles.header}>
         <Logo />
+        <UserInfo />
       </Header>
       <Content className={styles.content}>
         <Outlet />
