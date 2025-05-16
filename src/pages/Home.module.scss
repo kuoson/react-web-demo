@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px - 67px);
+  background: linear-gradient(to right, rgb(33, 147, 176), rgb(109, 213, 237));
+
+  button {
+    border-radius: 0;
+  }
+}
