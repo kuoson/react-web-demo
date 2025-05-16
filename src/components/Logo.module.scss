@@ -1,0 +1,9 @@
+.wrapper {
+  color: #f7f7f7;
+
+  :global {
+    .ant-space-item {
+      font-size: 26px;
+    }
+  }
+}
