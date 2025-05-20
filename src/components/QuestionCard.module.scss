@@ -1,0 +1,14 @@
+.wrapper {
+  padding: 6px 12px;
+  background-color: #fff;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+}

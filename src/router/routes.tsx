@@ -34,6 +34,8 @@ const REGISTER_PATHNAME = '/register'
 const MANAGE_LIST_PATHNAME = '/manage/list'
 const MANAGE_STAR_PATHNAME = '/manage/star'
 const MANAGE_TRASH_PATHNAME = '/manage/trash'
+const QUESTION_EDIT_PATHNAME = '/question/edit'
+const QUESTION_STAT_PATHNAME = '/question/stat'
 
 const routes: Route[] = [
   {
@@ -84,16 +86,16 @@ const routes: Route[] = [
     ],
   },
   {
-    path: 'question',
+    path: getPathSegment(QUESTION_EDIT_PATHNAME, 0),
     element: <QuestionLayout />,
     children: [
       {
-        path: 'edit/:id',
+        path: `${getPathSegment(QUESTION_EDIT_PATHNAME, 1)}/:id`,
         element: <Edit />,
         meta: { title: 'Edit' },
       },
       {
-        path: 'stat/:id',
+        path: `${getPathSegment(QUESTION_STAT_PATHNAME, 1)}/:id`,
         element: <Stat />,
         meta: { title: 'Stat' },
       },
@@ -101,6 +103,10 @@ const routes: Route[] = [
   },
 ]
 
+console.log(
+  getPathSegment(QUESTION_STAT_PATHNAME, 0),
+  getPathSegment(QUESTION_STAT_PATHNAME, 1),
+)
 export {
   HOME_PATHNAME,
   LOGIN_PATHNAME,
@@ -108,5 +114,7 @@ export {
   MANAGE_LIST_PATHNAME,
   MANAGE_STAR_PATHNAME,
   MANAGE_TRASH_PATHNAME,
+  QUESTION_EDIT_PATHNAME,
+  QUESTION_STAT_PATHNAME,
 }
 export default routes
