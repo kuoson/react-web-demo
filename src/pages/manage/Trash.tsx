@@ -112,6 +112,7 @@ const Trash: FC = () => {
             columns={tableColumn}
             dataSource={listMock}
             pagination={false}
+            rowKey={(row) => row._id} // 或 rowKey="_id"
           />
         ) : (
           <Empty description="暂无数据" />
