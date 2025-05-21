@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import QuestionCard, { type PropsType } from '@/components/QuestionCard'
-import styles from './List.module.scss'
+import styles from './common.module.scss'
 
 const listMock: PropsType[] = [
   {
