@@ -103,10 +103,6 @@ const routes: Route[] = [
   },
 ]
 
-console.log(
-  getPathSegment(QUESTION_STAT_PATHNAME, 0),
-  getPathSegment(QUESTION_STAT_PATHNAME, 1),
-)
 export {
   HOME_PATHNAME,
   LOGIN_PATHNAME,
