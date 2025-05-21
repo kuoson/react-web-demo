@@ -44,7 +44,7 @@ const List: FC<PropsType> = (props: PropsType) => {
             {isPublished ? (
               <Tag color="processing">已发布</Tag>
             ) : (
-              <Tag color="magenta">未发布</Tag>
+              <Tag>未发布</Tag>
             )}
             <span>答卷: {answerCount}</span>
             <span>{createdAt}</span>
