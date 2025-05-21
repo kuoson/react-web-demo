@@ -77,9 +77,10 @@ const List: FC = () => {
         <div>（搜索）</div>
       </div>
       <div className={styles.content}>
-        {listMock.map((item: PropsType) => (
-          <QuestionCard key={item._id} {...item} />
-        ))}
+        {listMock.length > 0 &&
+          listMock.map((item: PropsType) => (
+            <QuestionCard key={item._id} {...item} />
+          ))}
       </div>
       <div className={styles.footer}>load more...</div>
     </div>
