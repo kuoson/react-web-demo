@@ -1,8 +1,11 @@
-import type { FC } from 'react'
-import { Table, Empty, Tag } from 'antd'
+import { useState, type FC } from 'react'
+import { ExclamationCircleFilled } from '@ant-design/icons'
+import { Table, Empty, Tag, Button, Space, Modal } from 'antd'
 import type { TableProps } from 'antd'
 import { type PropsType } from '@/components/QuestionCard'
 import styles from './common.module.scss'
+
+const { confirm } = Modal
 
 const listMock: PropsType[] = [
   {
@@ -72,6 +75,21 @@ const listMock: PropsType[] = [
 ]
 
 const Trash: FC = () => {
+  const [selectedIds, setSelectedIds] = useState<React.Key[]>([])
+
+  const isOptionDisabled = selectedIds.length === 0
+
+  const del = () => {
+    confirm({
+      title: '确认彻底删除该问卷？',
+      icon: <ExclamationCircleFilled />,
+      content: '删除以后不可以找回',
+      onOk() {
+        console.log('OK')
+      },
+    })
+  }
+
   const tableColumn: TableProps<PropsType>['columns'] = [
     {
       title: '标题',
@@ -100,6 +118,31 @@ const Trash: FC = () => {
     },
   ]
 
+  const TableEle = (
+    <>
+      <Space>
+        <Button type="primary" disabled={isOptionDisabled}>
+          恢复
+        </Button>
+        <Button danger disabled={isOptionDisabled} onClick={del}>
+          彻底删除
+        </Button>
+      </Space>
+      <Table
+        columns={tableColumn}
+        dataSource={listMock}
+        pagination={false}
+        rowKey={(row) => row._id} // 或 rowKey="_id"
+        rowSelection={{
+          type: 'checkbox',
+          onChange: (selectedRowKeys: React.Key[]) => {
+            setSelectedIds(selectedRowKeys)
+          },
+        }}
+      />
+    </>
+  )
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.head}>
@@ -107,16 +150,7 @@ const Trash: FC = () => {
         <div>（搜索）</div>
       </div>
       <div className={styles.content}>
-        {listMock.length > 0 ? (
-          <Table
-            columns={tableColumn}
-            dataSource={listMock}
-            pagination={false}
-            rowKey={(row) => row._id} // 或 rowKey="_id"
-          />
-        ) : (
-          <Empty description="暂无数据" />
-        )}
+        {listMock.length > 0 ? TableEle : <Empty description="暂无数据" />}
       </div>
       {listMock.length > 0 && <div className={styles.footer}>分页</div>}
     </div>
