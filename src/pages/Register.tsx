@@ -31,13 +31,60 @@ const Register: FC = () => {
           autoComplete="off"
           onFinish={handleFinish}
         >
-          <Form.Item label="用户名" name="username">
+          <Form.Item
+            label="用户名"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: '请输入用户名',
+              },
+              {
+                type: 'string',
+                min: 5,
+                max: 20,
+                message: '字符长度在 5-20 之间',
+              },
+              {
+                pattern: /^\w+$/,
+                message: '只能输入字母数字下划线',
+              },
+            ]}
+          >
             <Input autoComplete="username" />
           </Form.Item>
-          <Form.Item label="密码" name="password">
+          <Form.Item
+            label="密码"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: '请输入密码',
+              },
+            ]}
+          >
             <Input.Password autoComplete="new-password" />
           </Form.Item>
-          <Form.Item label="确认密码" name="confirmPassword">
+          <Form.Item
+            label="确认密码"
+            name="confirmPassword"
+            dependencies={['password']} // validator 执行会依赖此
+            rules={[
+              {
+                required: true,
+                message: '请输入密码',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve()
+                  } else {
+                    return Promise.reject(new Error('两次密码输入不一致'))
+                  }
+                },
+              }),
+            ]}
+          >
             <Input.Password autoComplete="new-password" />
           </Form.Item>
           <Form.Item label="昵称" name="nickname">
