@@ -3,6 +3,7 @@ import { ExclamationCircleFilled } from '@ant-design/icons'
 import { Table, Empty, Tag, Button, Space, Modal } from 'antd'
 import type { TableProps } from 'antd'
 import { type PropsType } from '@/components/QuestionCard'
+import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
 
 const { confirm } = Modal
@@ -147,7 +148,9 @@ const Trash: FC = () => {
     <div className={styles.wrapper}>
       <div className={styles.head}>
         <h3>回收站</h3>
-        <div>（搜索）</div>
+        <div>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.content}>
         {listMock.length > 0 ? TableEle : <Empty description="暂无数据" />}

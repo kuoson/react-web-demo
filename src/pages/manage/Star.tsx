@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { Empty } from 'antd'
 import QuestionCard, { type PropsType } from '@/components/QuestionCard'
+import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
 
 const listMock: PropsType[] = [
@@ -75,7 +76,9 @@ const Star: FC = () => {
     <div className={styles.wrapper}>
       <div className={styles.head}>
         <h3>星标问卷</h3>
-        <div>（搜索）</div>
+        <div>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.content}>
         {listMock.length > 0 ? (
