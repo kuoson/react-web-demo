@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { UserAddOutlined } from '@ant-design/icons'
 import { Typography, Space, Form, Input, Button } from 'antd'
-import { HOME_PATHNAME } from '@/router/routes'
+import { LOGIN_PATHNAME } from '@/router/routes'
 import styles from './Register.module.scss'
 
 const { Title } = Typography
@@ -32,13 +32,13 @@ const Register: FC = () => {
           onFinish={handleFinish}
         >
           <Form.Item label="用户名" name="username">
-            <Input />
+            <Input autoComplete="username" />
           </Form.Item>
           <Form.Item label="密码" name="password">
-            <Input.Password />
+            <Input.Password autoComplete="new-password" />
           </Form.Item>
           <Form.Item label="确认密码" name="confirmPassword">
-            <Input.Password />
+            <Input.Password autoComplete="new-password" />
           </Form.Item>
           <Form.Item label="昵称" name="nickname">
             <Input />
@@ -48,7 +48,7 @@ const Register: FC = () => {
               <Button type="primary" htmlType="submit">
                 注册
               </Button>
-              <Link to={HOME_PATHNAME}>已有账户，请登录</Link>
+              <Link to={LOGIN_PATHNAME}>已有账户，请登录</Link>
             </Space>
           </Form.Item>
         </Form>
