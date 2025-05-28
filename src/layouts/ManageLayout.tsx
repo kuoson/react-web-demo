@@ -1,4 +1,5 @@
-import type { FC } from 'react'
+import { useState } from 'react'
+import { type FC } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   PlusOutlined,
@@ -6,23 +7,47 @@ import {
   StarOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { Button, Space, Divider } from 'antd'
+import { Button, Space, Divider, message } from 'antd'
 import {
   MANAGE_LIST_PATHNAME,
   MANAGE_STAR_PATHNAME,
   MANAGE_TRASH_PATHNAME,
+  QUESTION_EDIT_PATHNAME,
 } from '@/router/routes'
+import { reqCreateQuestion } from '@/api/question'
 import styles from './ManageLayout.module.scss'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
 
+  const [loading, setLoading] = useState(false)
+
+  const handleCreateQuestion = async () => {
+    setLoading(true)
+
+    try {
+      const resData = await reqCreateQuestion()
+      const { id } = resData
+      if (id) {
+        nav(`${QUESTION_EDIT_PATHNAME}/${id}`)
+        message.success('创建成成功')
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
         <Space direction="vertical">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            loading={loading}
+            onClick={handleCreateQuestion}
+          >
             新建问卷
           </Button>
           <Divider />
