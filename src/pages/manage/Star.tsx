@@ -3,11 +3,12 @@ import { Empty, Spin } from 'antd'
 import { useLoadQuestionList } from '@/hooks/useLoadQuestionLIst'
 import QuestionCard, { type PropsType } from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
+import ListPagination from '@/components/ListPagination'
 import styles from './common.module.scss'
 
 const Star: FC = () => {
   const { data = {}, loading } = useLoadQuestionList({ isStar: true })
-  const { list = [] } = data
+  const { list = [], total = 0 } = data
 
   return (
     <div className={styles.wrapper}>
@@ -26,7 +27,11 @@ const Star: FC = () => {
             : !loading && <Empty description="暂无数据" />}
         </Spin>
       </div>
-      {list.length > 0 && <div className={styles.footer}>分页</div>}
+      {list.length > 0 && (
+        <div className={styles.footer}>
+          <ListPagination total={total} />
+        </div>
+      )}
     </div>
   )
 }

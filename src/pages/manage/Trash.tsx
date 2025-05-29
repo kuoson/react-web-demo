@@ -5,6 +5,7 @@ import type { TableProps } from 'antd'
 import { useLoadQuestionList } from '@/hooks/useLoadQuestionLIst'
 import { type PropsType } from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
+import ListPagination from '@/components/ListPagination'
 import styles from './common.module.scss'
 
 const { confirm } = Modal
@@ -12,7 +13,7 @@ const { confirm } = Modal
 const Trash: FC = () => {
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([])
   const { data = {}, loading } = useLoadQuestionList({ isDeleted: true })
-  const { list = [] } = data
+  const { list = [], total = 0 } = data
 
   const isOptionDisabled = selectedIds.length === 0
 
@@ -97,7 +98,11 @@ const Trash: FC = () => {
             : !loading && <Empty description="暂无数据" />}
         </Spin>
       </div>
-      {list.length > 0 && <div className={styles.footer}>分页</div>}
+      {list.length > 0 && (
+        <div className={styles.footer}>
+          <ListPagination total={total} />
+        </div>
+      )}
     </div>
   )
 }
