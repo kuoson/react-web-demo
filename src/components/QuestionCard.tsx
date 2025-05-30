@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { FC } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import {
@@ -7,7 +8,9 @@ import {
   CopyOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { Tag, Space, Divider, Button } from 'antd'
+import { Tag, Space, Divider, Button, message } from 'antd'
+import { useRequest } from 'ahooks'
+import { reqUpdateQuestion } from '@/api/question'
 import { QUESTION_EDIT_PATHNAME, QUESTION_STAT_PATHNAME } from '@/router/routes'
 import styles from './QuestionCard.module.scss'
 
@@ -22,7 +25,24 @@ export type PropsType = {
 
 const List: FC<PropsType> = (props: PropsType) => {
   const nav = useNavigate()
+
   const { _id, title, createdAt, answerCount, isPublished, isStar } = props
+  const [curStar, setCurStar] = useState(isStar)
+
+  const { loading: changeStarLoading, run: handleChangeStar } = useRequest(
+    async () => {
+      await reqUpdateQuestion(_id, {
+        isStar: !curStar,
+      })
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        setCurStar(!curStar)
+        message.success('已更新')
+      },
+    },
+  )
 
   return (
     <>
@@ -36,7 +56,7 @@ const List: FC<PropsType> = (props: PropsType) => {
             }
           >
             <Space>
-              {isStar && <StarOutlined style={{ color: 'red' }} />}
+              {curStar && <StarOutlined style={{ color: 'red' }} />}
               {title}
             </Space>
           </Link>
@@ -74,8 +94,13 @@ const List: FC<PropsType> = (props: PropsType) => {
             </Button>
           </Space>
           <Space>
-            <Button icon={<StarOutlined />} type="text">
-              {isStar ? '取消标星' : '标星'}
+            <Button
+              icon={<StarOutlined />}
+              type="text"
+              loading={changeStarLoading}
+              onClick={handleChangeStar}
+            >
+              {curStar ? '取消标星' : '标星'}
             </Button>
             <Button icon={<CopyOutlined />} type="text">
               复制

@@ -11,6 +11,14 @@ export type getQuestionListSearchParamsType = {
   isDeleted: boolean
   isStar: boolean
 }
+
 export const reqGetQuestionList = (
   params: Partial<getQuestionListSearchParamsType>,
 ) => request.get<any, ResDataType>('/api/question', { params })
+
+export const reqUpdateQuestion = (
+  id: string,
+  params: {
+    [key: string]: any
+  },
+) => request.patch<any, ResDataType>(`/api/question/${id}`, params)
