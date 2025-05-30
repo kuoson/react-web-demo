@@ -10,7 +10,7 @@ import {
 } from '@ant-design/icons'
 import { Tag, Space, Divider, Button, message } from 'antd'
 import { useRequest } from 'ahooks'
-import { reqUpdateQuestion } from '@/api/question'
+import { reqUpdateQuestion, reqDuplicateQuestion } from '@/api/question'
 import { QUESTION_EDIT_PATHNAME, QUESTION_STAT_PATHNAME } from '@/router/routes'
 import styles from './QuestionCard.module.scss'
 
@@ -43,6 +43,15 @@ const List: FC<PropsType> = (props: PropsType) => {
       },
     },
   )
+
+  const { loading: changeDuplicateLoading, run: handleDuplicateStar } =
+    useRequest(async () => await reqDuplicateQuestion(_id), {
+      manual: true,
+      onSuccess: (res) => {
+        message.success('复制成功')
+        nav(`${QUESTION_EDIT_PATHNAME}/${res.id}`)
+      },
+    })
 
   return (
     <>
@@ -102,7 +111,12 @@ const List: FC<PropsType> = (props: PropsType) => {
             >
               {curStar ? '取消标星' : '标星'}
             </Button>
-            <Button icon={<CopyOutlined />} type="text">
+            <Button
+              icon={<CopyOutlined />}
+              type="text"
+              loading={changeDuplicateLoading}
+              onClick={handleDuplicateStar}
+            >
               复制
             </Button>
             <Button icon={<DeleteOutlined />} type="text">

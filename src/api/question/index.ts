@@ -22,3 +22,6 @@ export const reqUpdateQuestion = (
     [key: string]: any
   },
 ) => request.patch<any, ResDataType>(`/api/question/${id}`, params)
+
+export const reqDuplicateQuestion = (id: string) =>
+  request.post<any, ResDataType>(`/api/question/duplicate/${id}`)
