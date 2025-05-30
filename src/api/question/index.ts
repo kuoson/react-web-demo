@@ -6,8 +6,8 @@ export const reqCreateQuestion = () =>
 
 export type getQuestionListSearchParamsType = {
   keyword: string
-  page: string
-  pageSize: string
+  page: number
+  pageSize: number
   isDeleted: boolean
   isStar: boolean
 }

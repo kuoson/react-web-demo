@@ -13,8 +13,10 @@ export const useLoadQuestionList = (
 ) => {
   const [searchParams] = useSearchParams()
   const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
-  const page = searchParams.get(LIST_SEARCH_PARAM_CUR_PAGE_KEY) || ''
-  const pageSize = searchParams.get(LIST_SEARCH_PARAM_PAGE_SIZE_KEY) || ''
+  const page = parseInt(searchParams.get(LIST_SEARCH_PARAM_CUR_PAGE_KEY) || '1')
+  const pageSize = parseInt(
+    searchParams.get(LIST_SEARCH_PARAM_PAGE_SIZE_KEY) || '10',
+  )
   const { isStar, isDeleted } = opt || {}
 
   return useRequest(
