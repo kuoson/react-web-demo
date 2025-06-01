@@ -1,7 +1,9 @@
 import { useState, type FC } from 'react'
 import { ExclamationCircleFilled } from '@ant-design/icons'
-import { Table, Empty, Tag, Button, Space, Modal, Spin } from 'antd'
+import { Table, Empty, Tag, Button, Space, Modal, Spin, message } from 'antd'
 import type { TableProps } from 'antd'
+import { useRequest } from 'ahooks'
+import { reqUpdateQuestion } from '@/api/question'
 import { useLoadQuestionList } from '@/hooks/useLoadQuestionList'
 import { type PropsType } from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
@@ -12,10 +14,30 @@ const { confirm } = Modal
 
 const Trash: FC = () => {
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([])
-  const { data = {}, loading } = useLoadQuestionList({ isDeleted: true })
+  const {
+    data = {},
+    loading,
+    refresh: refreshList,
+  } = useLoadQuestionList({ isDeleted: true })
   const { list = [], total = 0 } = data
 
   const isOptionDisabled = selectedIds.length === 0
+
+  const { loading: recoverLoading, run: handleRecover } = useRequest(
+    async () => {
+      for await (const id of selectedIds) {
+        await reqUpdateQuestion(id.toString(), { isDeleted: false })
+      }
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('恢复成功')
+        setSelectedIds([])
+        refreshList()
+      },
+    },
+  )
 
   const del = () => {
     confirm({
@@ -58,8 +80,13 @@ const Trash: FC = () => {
 
   const TableEle = (
     <>
-      <Space>
-        <Button type="primary" disabled={isOptionDisabled}>
+      <Space style={{ marginBottom: '10px' }}>
+        <Button
+          type="primary"
+          disabled={isOptionDisabled}
+          loading={recoverLoading}
+          onClick={handleRecover}
+        >
           恢复
         </Button>
         <Button danger disabled={isOptionDisabled} onClick={del}>
