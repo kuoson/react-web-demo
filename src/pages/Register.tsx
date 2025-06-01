@@ -1,15 +1,35 @@
 import type { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserAddOutlined } from '@ant-design/icons'
-import { Typography, Space, Form, Input, Button } from 'antd'
+import { Typography, Space, Form, Input, Button, message } from 'antd'
+import { useRequest } from 'ahooks'
+import { reqRegister } from '@/api/user'
 import { LOGIN_PATHNAME } from '@/router/routes'
 import styles from './Register.module.scss'
 
 const { Title } = Typography
 
 const Register: FC = () => {
+  const nav = useNavigate()
+
+  const { loading, run: handleRegister } = useRequest(
+    async (username: string, password: string, nickname: string) => {
+      await reqRegister(username, password, nickname)
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('注册成功, 即将跳转登录页')
+        setTimeout(() => {
+          nav(LOGIN_PATHNAME)
+        }, 3000)
+      },
+    },
+  )
+
   const handleFinish = (vals: any) => {
-    console.log(vals)
+    const { username, password, nickname } = vals
+    handleRegister(username, password, nickname)
   }
 
   return (
@@ -25,8 +45,8 @@ const Register: FC = () => {
       <div>
         <Form
           name="basic"
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 18 }}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
           autoComplete="off"
           onFinish={handleFinish}
@@ -92,7 +112,7 @@ const Register: FC = () => {
           </Form.Item>
           <Form.Item label={null}>
             <Space>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 注册
               </Button>
               <Link to={LOGIN_PATHNAME}>已有账户，请登录</Link>
