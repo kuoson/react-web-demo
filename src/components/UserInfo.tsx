@@ -16,8 +16,10 @@ const UserInfo: FC = () => {
   const handleLogout = () => {
     removeToken()
     message.success('退出成功，即将返回登录页')
-    setTimeout(() => {
+
+    const timer = setTimeout(() => {
       nav(LOGIN_PATHNAME)
+      clearTimeout(timer)
     }, 3000)
   }
 

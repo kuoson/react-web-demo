@@ -20,8 +20,10 @@ const Register: FC = () => {
       manual: true,
       onSuccess: () => {
         message.success('注册成功, 即将跳转登录页')
-        setTimeout(() => {
+
+        const timer = setTimeout(() => {
           nav(LOGIN_PATHNAME)
+          clearTimeout(timer)
         }, 3000)
       },
     },

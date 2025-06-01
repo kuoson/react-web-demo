@@ -43,8 +43,9 @@ const Login: FC = () => {
         setToken(resData.token)
         message.success('登录成功，即将跳转首页')
 
-        setTimeout(() => {
+        const timer = setTimeout(() => {
           nav(HOME_PATHNAME)
+          clearTimeout(timer)
         }, 3000)
       },
     },
