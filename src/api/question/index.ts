@@ -1,5 +1,5 @@
-import request from '@/utils/request'
-import type { ResDataType } from '@/utils/request'
+import request from '@/api'
+import type { ResDataType } from '@/api'
 
 export const reqCreateQuestion = () =>
   request.post<any, ResDataType>('/api/question')
