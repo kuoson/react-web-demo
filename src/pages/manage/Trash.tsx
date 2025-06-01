@@ -3,7 +3,7 @@ import { ExclamationCircleFilled } from '@ant-design/icons'
 import { Table, Empty, Tag, Button, Space, Modal, Spin, message } from 'antd'
 import type { TableProps } from 'antd'
 import { useRequest } from 'ahooks'
-import { reqUpdateQuestion } from '@/api/question'
+import { reqUpdateQuestion, reqDeleteQuestion } from '@/api/question'
 import { useLoadQuestionList } from '@/hooks/useLoadQuestionList'
 import { type PropsType } from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
@@ -39,14 +39,26 @@ const Trash: FC = () => {
     },
   )
 
-  const del = () => {
+  const { loading: deleteLoading, run: handleConfirmDel } = useRequest(
+    async () => {
+      await reqDeleteQuestion(selectedIds as string[])
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('删除成功')
+        setSelectedIds([])
+        refreshList()
+      },
+    },
+  )
+
+  const handleDel = () => {
     confirm({
       title: '确认彻底删除该问卷？',
       icon: <ExclamationCircleFilled />,
       content: '删除以后不可以找回',
-      onOk() {
-        console.log('OK')
-      },
+      onOk: handleConfirmDel,
     })
   }
 
@@ -89,7 +101,12 @@ const Trash: FC = () => {
         >
           恢复
         </Button>
-        <Button danger disabled={isOptionDisabled} onClick={del}>
+        <Button
+          danger
+          disabled={isOptionDisabled}
+          loading={deleteLoading}
+          onClick={handleDel}
+        >
           彻底删除
         </Button>
       </Space>

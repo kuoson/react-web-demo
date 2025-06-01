@@ -25,3 +25,6 @@ export const reqUpdateQuestion = (
 
 export const reqDuplicateQuestion = (id: string) =>
   request.post<any, ResDataType>(`/api/question/duplicate/${id}`)
+
+export const reqDeleteQuestion = (ids: string[]) =>
+  request.delete<any, ResDataType>('/api/question', { data: { ids } })
