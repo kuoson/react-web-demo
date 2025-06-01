@@ -1,8 +1,18 @@
 import axios from 'axios'
 import { message } from 'antd'
+import { getToken } from '@/utils/userToken'
 
 const request = axios.create({
   timeout: 10 * 1000,
+})
+
+request.interceptors.request.use((config) => {
+  const token = getToken()
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`
+  }
+
+  return config
 })
 
 request.interceptors.response.use(

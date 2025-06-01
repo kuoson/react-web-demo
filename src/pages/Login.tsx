@@ -1,8 +1,11 @@
 import { useEffect, type FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
-import { Typography, Space, Form, Input, Button, Checkbox } from 'antd'
-import { REGISTER_PATHNAME } from '@/router/routes'
+import { Typography, Space, Form, Input, Button, Checkbox, message } from 'antd'
+import { useRequest } from 'ahooks'
+import { reqLogin } from '@/api/user'
+import { REGISTER_PATHNAME, HOME_PATHNAME } from '@/router/routes'
+import { setToken } from '@/utils/userToken'
 import styles from './Login.module.scss'
 
 const { Title } = Typography
@@ -28,7 +31,24 @@ const getUserInfoFromLocal = () => {
 }
 
 const Login: FC = () => {
+  const nav = useNavigate()
   const [form] = Form.useForm()
+
+  const { loading, run: handleLogin } = useRequest(
+    async (username: string, password: string) =>
+      await reqLogin(username, password),
+    {
+      manual: true,
+      onSuccess: (resData) => {
+        setToken(resData.token)
+        message.success('登录成功，即将跳转首页')
+
+        setTimeout(() => {
+          nav(HOME_PATHNAME)
+        }, 3000)
+      },
+    },
+  )
 
   const handleFinish = (vals: any) => {
     const { username, password, remember } = vals
@@ -38,6 +58,8 @@ const Login: FC = () => {
     } else {
       delUserInfoFromLocal()
     }
+
+    handleLogin(username, password)
   }
 
   useEffect(() => {
@@ -109,7 +131,7 @@ const Login: FC = () => {
           </Form.Item>
           <Form.Item label={null}>
             <Space>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 登录
               </Button>
               <Link to={REGISTER_PATHNAME}>注册新用户</Link>

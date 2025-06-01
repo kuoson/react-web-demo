@@ -11,3 +11,9 @@ export const reqRegister = (
     password,
     nickname,
   })
+
+export const reqLogin = (username: string, password: string) =>
+  request.post<any, ResDataType>('/api/user/login', {
+    username,
+    password,
+  })
