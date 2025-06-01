@@ -17,3 +17,6 @@ export const reqLogin = (username: string, password: string) =>
     username,
     password,
   })
+
+export const reqGetUserInfo = () =>
+  request.get<any, ResDataType>('/api/user/info')
