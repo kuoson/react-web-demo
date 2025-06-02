@@ -1,19 +1,21 @@
 import { type FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { UserOutlined } from '@ant-design/icons'
 import { Button, message, Space } from 'antd'
-import { useRequest } from 'ahooks'
-import { reqGetUserInfo } from '@/api/user'
 import { LOGIN_PATHNAME } from '@/router/routes'
 import { removeToken } from '@/utils/userToken'
+import { logout } from '@/store/userSlice'
+import { useGetUserInfo } from '@/hooks/useGetUserInfo'
 
 const UserInfo: FC = () => {
   const nav = useNavigate()
+  const dispatch = useDispatch()
 
-  const { data } = useRequest(reqGetUserInfo)
-  const { username, nickname } = data || {}
+  const { username, nickname } = useGetUserInfo()
 
   const handleLogout = () => {
+    dispatch(logout())
     removeToken()
     message.success('退出成功，即将返回登录页')
 

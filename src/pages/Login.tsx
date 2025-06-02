@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { Typography, Space, Form, Input, Button, Checkbox, message } from 'antd'
 import { useRequest } from 'ahooks'
+import { useDispatch } from 'react-redux'
 import { reqLogin } from '@/api/user'
 import { REGISTER_PATHNAME, HOME_PATHNAME } from '@/router/routes'
 import { setToken } from '@/utils/userToken'
+import { getUserInfo } from '@/store/userSlice'
 import styles from './Login.module.scss'
 
 const { Title } = Typography
@@ -32,6 +34,7 @@ const getUserInfoFromLocal = () => {
 
 const Login: FC = () => {
   const nav = useNavigate()
+  const dispatch = useDispatch()
   const [form] = Form.useForm()
 
   const { loading, run: handleLogin } = useRequest(
@@ -40,6 +43,7 @@ const Login: FC = () => {
     {
       manual: true,
       onSuccess: (resData) => {
+        dispatch(getUserInfo())
         setToken(resData.token)
         message.success('登录成功，即将跳转首页')
 
