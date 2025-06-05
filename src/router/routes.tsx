@@ -1,5 +1,5 @@
 import { redirect } from 'react-router-dom'
-import store from '@/store'
+import { store } from '@/store'
 import type { Route } from './routesType'
 import MainLayout from '@/layouts/MainLayout'
 import ManageLayout from '@/layouts/ManageLayout'
