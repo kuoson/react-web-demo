@@ -1,0 +1,48 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f0f2f5;
+  padding: 0 12px;
+
+  .header {
+    height: 32px;
+    background-color: #fff;
+  }
+
+  .content-wrapper {
+    flex: auto;
+    padding: 12px 0;
+
+    .content {
+      display: flex;
+      height: 100%;
+
+      .left {
+        width: 285px;
+        background-color: #fff;
+      }
+
+      .main {
+        flex: auto;
+        position: relative;
+
+        .canvas-wrapper {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: 400px;
+          height: 100%;
+          background-color: #fff;
+          overflow: auto;
+        }
+      }
+
+      .right {
+        width: 300px;
+        background-color: #fff;
+      }
+    }
+  }
+}
