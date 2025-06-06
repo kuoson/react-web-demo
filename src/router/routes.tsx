@@ -1,5 +1,3 @@
-import { redirect } from 'react-router-dom'
-import { store } from '@/store'
 import type { Route } from './routesType'
 import MainLayout from '@/layouts/MainLayout'
 import ManageLayout from '@/layouts/ManageLayout'
@@ -38,14 +36,6 @@ const MANAGE_TRASH_PATHNAME = '/manage/trash'
 const QUESTION_EDIT_PATHNAME = '/question/edit'
 const QUESTION_STAT_PATHNAME = '/question/stat'
 
-const checkLogin = async () => {
-  const state = store.getState()
-
-  if (!state.user.username) {
-    return redirect('/login')
-  }
-}
-
 const routes: Route[] = [
   {
     path: '/',
@@ -69,7 +59,6 @@ const routes: Route[] = [
       {
         path: getPathSegment(MANAGE_LIST_PATHNAME, 0),
         element: <ManageLayout />,
-        loader: checkLogin,
         children: [
           {
             path: getPathSegment(MANAGE_LIST_PATHNAME, 1),
@@ -98,7 +87,6 @@ const routes: Route[] = [
   {
     path: getPathSegment(QUESTION_EDIT_PATHNAME, 0),
     element: <QuestionLayout />,
-    loader: checkLogin,
     children: [
       {
         path: `${getPathSegment(QUESTION_EDIT_PATHNAME, 1)}/:id`,
