@@ -2,10 +2,10 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 // 导入本地存储插件，可选storage，cookie，session等
 import storage from 'redux-persist/lib/storage'
-import userReducer from './userSlice'
+import userSlice from './reducers/userSlice'
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  user: userSlice,
 })
 
 const persistConfig = {

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { reqLogin } from '@/api/user'
 import { REGISTER_PATHNAME, HOME_PATHNAME } from '@/router/routes'
 import { setToken } from '@/utils/userToken'
-import { getUserInfo } from '@/store/userSlice'
+import { getUserInfo } from '@/store/reducers/userSlice'
 import styles from './Login.module.scss'
 
 const { Title } = Typography
