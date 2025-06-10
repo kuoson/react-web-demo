@@ -18,7 +18,7 @@ import styles from './QuestionCard.module.scss'
 const { confirm } = Modal
 
 export type PropsType = {
-  _id: string
+  _id: string //服务端 mongodb, 会为数据项自动添加 _id 的字段
   title: string
   createdAt: string
   answerCount: number
