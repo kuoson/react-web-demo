@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { changeSelected } from '@/store/reducers/questionComponentsSlice'
+import EditHeader from './EditHeader'
 import LeftPanel from './LeftPanel'
 import EditCanvas from './EditCanvas'
 import RightPanel from './RightPanel'
@@ -17,7 +18,9 @@ const Edit: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>Header</div>
+      <div className={styles.header}>
+        <EditHeader />
+      </div>
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
           <div className={styles.left}>

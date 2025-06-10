@@ -58,6 +58,13 @@ export const questionComponentsSlice = createSlice({
           : cpn,
       )
     },
+    removeComponent: (state: ComponentsStateType) => {
+      const { componentList, selectedId } = state
+
+      state.componentList = componentList.filter(
+        (cpn) => cpn.fe_id !== selectedId,
+      )
+    },
   },
 })
 
@@ -66,6 +73,7 @@ export const {
   changeSelected,
   addComponent,
   changeComponentProps,
+  removeComponent,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer
