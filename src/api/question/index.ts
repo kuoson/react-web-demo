@@ -28,3 +28,6 @@ export const reqDuplicateQuestion = (id: string) =>
 
 export const reqDeleteQuestion = (ids: string[]) =>
   request.delete<any, ResDataType>('/api/question', { data: { ids } })
+
+export const reqGetQuestionInfo = (id: string) =>
+  request.get<any, ResDataType>(`/api/question/${id}`)

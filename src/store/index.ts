@@ -3,9 +3,11 @@ import { persistStore, persistReducer } from 'redux-persist'
 // 导入本地存储插件，可选storage，cookie，session等
 import storage from 'redux-persist/lib/storage'
 import userSlice from './reducers/userSlice'
+import questionComponentsSlice from './reducers/questionComponentsSlice'
 
 const rootReducer = combineReducers({
   user: userSlice,
+  questionComponents: questionComponentsSlice,
 })
 
 const persistConfig = {
