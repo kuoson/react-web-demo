@@ -6,13 +6,13 @@ import ComponentLib from './ComponentLib'
 
 const items: TabsProps['items'] = [
   {
-    key: '1',
+    key: 'componentLib',
     label: '组件库',
     children: <ComponentLib />,
     icon: <AppstoreAddOutlined />,
   },
   {
-    key: '2',
+    key: 'layers',
     label: '图层',
     children: 'Content of Tab Pane 2',
     icon: <BarsOutlined />,
@@ -20,9 +20,7 @@ const items: TabsProps['items'] = [
 ]
 
 const LeftPanel: FC = () => {
-  return (
-    <Tabs defaultActiveKey="1" items={items} style={{ padding: '0 10px' }} />
-  )
+  return <Tabs defaultActiveKey="componentLib" items={items} />
 }
 
 export default LeftPanel
