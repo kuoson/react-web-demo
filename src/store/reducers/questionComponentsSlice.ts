@@ -46,10 +46,26 @@ export const questionComponentsSlice = createSlice({
         state.selectedId = action.payload.fe_id
       }
     },
+    changeComponentProps: (
+      state: ComponentsStateType,
+      action: PayloadAction<{ fe_id: string; newProps: ComponentsPropsType }>,
+    ) => {
+      const { fe_id, newProps } = action.payload
+
+      state.componentList = state.componentList.map((cpn) =>
+        cpn.fe_id === fe_id
+          ? { ...cpn, props: { ...cpn.props, ...newProps } }
+          : cpn,
+      )
+    },
   },
 })
 
-export const { resetComponents, changeSelected, addComponent } =
-  questionComponentsSlice.actions
+export const {
+  resetComponents,
+  changeSelected,
+  addComponent,
+  changeComponentProps,
+} = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer

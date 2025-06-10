@@ -10,6 +10,7 @@ export type ComponentsConfType = {
   title: string
   type: string
   Component: FC<ComponentsPropsType>
+  PropsComponent: FC<ComponentsPropsType>
 }
 
 const componentConfList: ComponentsConfType[] = [

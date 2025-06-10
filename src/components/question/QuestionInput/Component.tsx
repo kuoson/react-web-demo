@@ -4,7 +4,9 @@ import type { QuestionInputPropsType } from './type'
 
 const { Title } = Typography
 
-const Input: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
+const QuestionInput: FC<QuestionInputPropsType> = (
+  props: QuestionInputPropsType,
+) => {
   const { title = '标题', level = 1, isCenter = false } = props
 
   return (
@@ -14,4 +16,4 @@ const Input: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
   )
 }
 
-export default Input
+export default QuestionInput

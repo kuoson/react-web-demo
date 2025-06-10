@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { changeSelected } from '@/store/reducers/questionComponentsSlice'
 import LeftPanel from './LeftPanel'
 import EditCanvas from './EditCanvas'
+import RightPanel from './RightPanel'
 import styles from './index.module.scss'
 import { useLoadQuestionData } from '@/hooks/useLoadQuestionData'
 
@@ -29,7 +30,9 @@ const Edit: FC = () => {
               </div>
             </div>
           </div>
-          <div className={styles.right}>right</div>
+          <div className={styles.right}>
+            <RightPanel />
+          </div>
         </div>
       </div>
     </div>
