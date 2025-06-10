@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { ComponentsPropsType } from '@/components/question'
+import { getNextSelectedId } from '@/utils/question'
 
 export type componentInfoType = {
   fe_id: string // 前端生成的 id, 服务端 mongodb 不认这种格式，所以自定义
@@ -61,9 +62,11 @@ export const questionComponentsSlice = createSlice({
     removeComponent: (state: ComponentsStateType) => {
       const { componentList, selectedId } = state
 
+      const nextSelectedId = getNextSelectedId(componentList, selectedId)
       state.componentList = componentList.filter(
         (cpn) => cpn.fe_id !== selectedId,
       )
+      state.selectedId = nextSelectedId
     },
   },
 })
