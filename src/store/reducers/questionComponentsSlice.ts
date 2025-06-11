@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import cloneDeep from 'lodash.clonedeep'
 import type { ComponentsPropsType } from '@/components/question'
 import { getNextSelectedId } from '@/utils/question'
 
@@ -14,11 +15,13 @@ export type componentInfoType = {
 export type ComponentsStateType = {
   componentList: Array<componentInfoType>
   selectedId: string
+  copiedComponent: componentInfoType | null
 }
 
 const INIT_STATE: ComponentsStateType = {
   componentList: [],
   selectedId: '',
+  copiedComponent: null,
 }
 
 export const questionComponentsSlice = createSlice({
@@ -105,6 +108,13 @@ export const questionComponentsSlice = createSlice({
         cpn.fe_id === selectedId ? { ...cpn, isLocked: !cpn.isLocked } : cpn,
       )
     },
+
+    copySelectedComponent: (state: ComponentsStateType) => {
+      const { componentList, selectedId } = state
+
+      const selectedCpn = componentList.find((cpn) => cpn.fe_id === selectedId)
+      state.copiedComponent = cloneDeep(selectedCpn) || null
+    },
   },
 })
 
@@ -116,6 +126,7 @@ export const {
   removeSelectedComponent,
   hiddenComponent,
   toggleSelectedComponentLocked,
+  copySelectedComponent,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer

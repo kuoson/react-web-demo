@@ -4,12 +4,14 @@ import {
   DeleteOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
+  CopyOutlined,
 } from '@ant-design/icons'
 import { Button, Tooltip, Space } from 'antd'
 import {
   removeSelectedComponent,
   hiddenComponent,
   toggleSelectedComponentLocked,
+  copySelectedComponent,
 } from '@/store/reducers/questionComponentsSlice'
 import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
 
@@ -28,6 +30,10 @@ const EditToolBar: FC = () => {
 
   const handleLock = () => {
     dispatch(toggleSelectedComponentLocked())
+  }
+
+  const handleCopy = () => {
+    dispatch(copySelectedComponent())
   }
 
   return (
@@ -49,6 +55,9 @@ const EditToolBar: FC = () => {
           type={isLocked ? 'primary' : 'default'}
           onClick={handleLock}
         />
+      </Tooltip>
+      <Tooltip title="复制">
+        <Button shape="circle" icon={<CopyOutlined />} onClick={handleCopy} />
       </Tooltip>
     </Space>
   )
