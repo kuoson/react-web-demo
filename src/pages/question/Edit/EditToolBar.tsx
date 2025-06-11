@@ -7,9 +7,9 @@ import {
 } from '@ant-design/icons'
 import { Button, Tooltip, Space } from 'antd'
 import {
-  removeComponent,
+  removeSelectedComponent,
   hiddenComponent,
-  toggleComponentLocked,
+  toggleSelectedComponentLocked,
 } from '@/store/reducers/questionComponentsSlice'
 import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
 
@@ -19,7 +19,7 @@ const EditToolBar: FC = () => {
   const dispatch = useDispatch()
 
   const handleDel = () => {
-    dispatch(removeComponent())
+    dispatch(removeSelectedComponent())
   }
 
   const handleHidden = () => {
@@ -27,7 +27,7 @@ const EditToolBar: FC = () => {
   }
 
   const handleLock = () => {
-    dispatch(toggleComponentLocked())
+    dispatch(toggleSelectedComponentLocked())
   }
 
   return (

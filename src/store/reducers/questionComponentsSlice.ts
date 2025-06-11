@@ -65,7 +65,7 @@ export const questionComponentsSlice = createSlice({
       )
     },
 
-    removeComponent: (state: ComponentsStateType) => {
+    removeSelectedComponent: (state: ComponentsStateType) => {
       const { componentList, selectedId } = state
 
       const nextSelectedId = getNextSelectedId(componentList, selectedId)
@@ -98,7 +98,7 @@ export const questionComponentsSlice = createSlice({
       }
     },
 
-    toggleComponentLocked: (state: ComponentsStateType) => {
+    toggleSelectedComponentLocked: (state: ComponentsStateType) => {
       const { componentList, selectedId } = state
 
       state.componentList = componentList.map((cpn) =>
@@ -113,9 +113,9 @@ export const {
   changeSelected,
   addComponent,
   changeComponentProps,
-  removeComponent,
+  removeSelectedComponent,
   hiddenComponent,
-  toggleComponentLocked,
+  toggleSelectedComponentLocked,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer
