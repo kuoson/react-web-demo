@@ -116,6 +116,42 @@ export const questionComponentsSlice = createSlice({
       copiedComponent.fe_id = nanoid()
       insertComponent(state, copiedComponent)
     },
+
+    selectPrevComponent: (state: ComponentsStateType) => {
+      const { componentList, selectedId } = state
+
+      const selectedIndex = componentList.findIndex(
+        (cpn) => cpn.fe_id === selectedId,
+      )
+
+      if (selectedIndex < 0) {
+        return
+      }
+
+      if (selectedIndex === 0) {
+        return
+      }
+
+      state.selectedId = componentList[selectedIndex - 1].fe_id
+    },
+
+    selectNextComponent: (state: ComponentsStateType) => {
+      const { componentList, selectedId } = state
+
+      const selectedIndex = componentList.findIndex(
+        (cpn) => cpn.fe_id === selectedId,
+      )
+
+      if (selectedIndex < 0) {
+        return
+      }
+
+      if (selectedIndex + 1 === componentList.length) {
+        return
+      }
+
+      state.selectedId = componentList[selectedIndex + 1].fe_id
+    },
   },
 })
 
@@ -129,6 +165,8 @@ export const {
   toggleSelectedComponentLocked,
   copySelectedComponent,
   pasteCopiedComponent,
+  selectPrevComponent,
+  selectNextComponent,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer

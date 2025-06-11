@@ -4,6 +4,8 @@ import {
   removeSelectedComponent,
   copySelectedComponent,
   pasteCopiedComponent,
+  selectPrevComponent,
+  selectNextComponent,
 } from '@/store/reducers/questionComponentsSlice'
 
 const isActiveElement = () => {
@@ -39,5 +41,21 @@ export const useBindCanvasKeyPress = () => {
     }
 
     dispatch(pasteCopiedComponent())
+  })
+
+  useKeyPress('uparrow', () => {
+    if (!isActiveElement()) {
+      return
+    }
+
+    dispatch(selectPrevComponent())
+  })
+
+  useKeyPress('downarrow', () => {
+    if (!isActiveElement()) {
+      return
+    }
+
+    dispatch(selectNextComponent())
   })
 }
