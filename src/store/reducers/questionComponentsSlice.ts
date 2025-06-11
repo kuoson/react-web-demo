@@ -6,6 +6,7 @@ export type componentInfoType = {
   fe_id: string // 前端生成的 id, 服务端 mongodb 不认这种格式，所以自定义
   type: string
   title: string
+  isHidden?: boolean
   props?: ComponentsPropsType
 }
 
@@ -68,6 +69,28 @@ export const questionComponentsSlice = createSlice({
       )
       state.selectedId = nextSelectedId
     },
+    hiddenComponent: (
+      state: ComponentsStateType,
+      action: PayloadAction<{ id: string; isHidden: boolean }>,
+    ) => {
+      const { componentList } = state
+      const { id, isHidden } = action.payload
+
+      if (!id) {
+        return
+      }
+
+      const nextSelectedId = getNextSelectedId(componentList, id)
+      state.componentList = componentList.map((cpn) =>
+        cpn.fe_id === id ? { ...cpn, isHidden } : cpn,
+      )
+
+      if (isHidden) {
+        state.selectedId = nextSelectedId
+      } else {
+        state.selectedId = id
+      }
+    },
   },
 })
 
@@ -77,6 +100,7 @@ export const {
   addComponent,
   changeComponentProps,
   removeComponent,
+  hiddenComponent,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer

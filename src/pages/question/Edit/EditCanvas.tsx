@@ -43,23 +43,25 @@ const EditCanvas: FC<propsType> = ({ loading }) => {
 
   return (
     <div className={styles.wrapper}>
-      {componentList.map((item: componentInfoType) => {
-        const { fe_id } = item
+      {componentList
+        .filter((cpn: componentInfoType) => !cpn.isHidden)
+        .map((item: componentInfoType) => {
+          const { fe_id } = item
 
-        return (
-          <div
-            className={classNames(styles['component-wrapper'], {
-              [styles.selected]: selectedId === fe_id,
-            })}
-            key={fe_id}
-            onClick={(e) => {
-              handleClearSelectd(e, fe_id)
-            }}
-          >
-            <div className={styles.component}>{genComponent(item)}</div>
-          </div>
-        )
-      })}
+          return (
+            <div
+              className={classNames(styles['component-wrapper'], {
+                [styles.selected]: selectedId === fe_id,
+              })}
+              key={fe_id}
+              onClick={(e) => {
+                handleClearSelectd(e, fe_id)
+              }}
+            >
+              <div className={styles.component}>{genComponent(item)}</div>
+            </div>
+          )
+        })}
     </div>
   )
 }

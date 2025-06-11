@@ -4,15 +4,24 @@ export const getNextSelectedId = (
   componentList: componentInfoType[],
   selectedId: string,
 ) => {
-  const curIndex = componentList.findIndex((cpn) => cpn.fe_id === selectedId)
-
-  if (curIndex < 0 || componentList.length === 1) {
+  if (!selectedId || componentList.length <= 0) {
     return ''
   }
 
-  if (curIndex + 1 === componentList.length) {
-    return componentList[curIndex - 1].fe_id
+  const componentDisplayList: componentInfoType[] = componentList.filter(
+    (cpn) => !cpn.isHidden,
+  )
+  const curIndex = componentDisplayList.findIndex(
+    (cpn) => cpn.fe_id === selectedId,
+  )
+
+  if (curIndex < 0 || componentDisplayList.length === 1) {
+    return ''
   }
 
-  return componentList[curIndex + 1].fe_id
+  if (curIndex + 1 === componentDisplayList.length) {
+    return componentDisplayList[curIndex - 1].fe_id
+  }
+
+  return componentDisplayList[curIndex + 1].fe_id
 }
