@@ -7,6 +7,7 @@ export type componentInfoType = {
   type: string
   title: string
   isHidden?: boolean
+  isLocked?: boolean
   props?: ComponentsPropsType
 }
 
@@ -28,10 +29,12 @@ export const questionComponentsSlice = createSlice({
       state: ComponentsStateType,
       action: PayloadAction<ComponentsStateType>,
     ) => action.payload,
+
     changeSelected: (
       state: ComponentsStateType,
       action: PayloadAction<string>,
     ) => ({ ...state, selectedId: action.payload }),
+
     addComponent: (
       state: ComponentsStateType,
       action: PayloadAction<componentInfoType>,
@@ -48,6 +51,7 @@ export const questionComponentsSlice = createSlice({
         state.selectedId = action.payload.fe_id
       }
     },
+
     changeComponentProps: (
       state: ComponentsStateType,
       action: PayloadAction<{ fe_id: string; newProps: ComponentsPropsType }>,
@@ -60,6 +64,7 @@ export const questionComponentsSlice = createSlice({
           : cpn,
       )
     },
+
     removeComponent: (state: ComponentsStateType) => {
       const { componentList, selectedId } = state
 
@@ -69,6 +74,7 @@ export const questionComponentsSlice = createSlice({
       )
       state.selectedId = nextSelectedId
     },
+
     hiddenComponent: (
       state: ComponentsStateType,
       action: PayloadAction<{ id: string; isHidden: boolean }>,
@@ -91,6 +97,14 @@ export const questionComponentsSlice = createSlice({
         state.selectedId = id
       }
     },
+
+    toggleComponentLocked: (state: ComponentsStateType) => {
+      const { componentList, selectedId } = state
+
+      state.componentList = componentList.map((cpn) =>
+        cpn.fe_id === selectedId ? { ...cpn, isLocked: !cpn.isLocked } : cpn,
+      )
+    },
   },
 })
 
@@ -101,6 +115,7 @@ export const {
   changeComponentProps,
   removeComponent,
   hiddenComponent,
+  toggleComponentLocked,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer

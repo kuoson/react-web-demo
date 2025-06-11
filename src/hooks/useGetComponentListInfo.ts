@@ -6,9 +6,9 @@ export const useGetComponentListInfo = () => {
     (state) => state.questionComponents,
   )
 
-  const selectedComponent = componentList.find(
-    (cpn: componentInfoType) => cpn.fe_id === selectedId,
-  )
+  const selectedComponent =
+    componentList.find((cpn: componentInfoType) => cpn.fe_id === selectedId) ||
+    {}
 
   return { componentList, selectedId, selectedComponent }
 }

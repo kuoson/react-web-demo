@@ -5,7 +5,12 @@ import type { QuestionTitlePropsType } from './type'
 const PropsComponent: FC<QuestionTitlePropsType> = (
   props: QuestionTitlePropsType,
 ) => {
-  const { title = '标题', placeholder = 'placeholder', onChange } = props
+  const {
+    title = '标题',
+    placeholder = 'placeholder',
+    disabled,
+    onChange,
+  } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {
@@ -19,6 +24,7 @@ const PropsComponent: FC<QuestionTitlePropsType> = (
       form={form}
       initialValues={{ title, placeholder }}
       onValuesChange={handleValuesChange}
+      disabled={disabled}
     >
       <Form.Item label="标题内容" name="title" rules={[{ required: true }]}>
         <Input />

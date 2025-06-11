@@ -13,6 +13,7 @@ const NoProp = () => {
 
 const ComponentProp: FC = () => {
   const { selectedComponent } = useGetComponentListInfo()
+  const { isLocked } = selectedComponent
   const dispatch = useDispatch()
 
   if (!selectedComponent) {
@@ -30,7 +31,9 @@ const ComponentProp: FC = () => {
   }
 
   const { PropsComponent } = selectedComponentConf
-  return <PropsComponent {...props} onChange={handleChange} />
+  return (
+    <PropsComponent {...props} onChange={handleChange} disabled={isLocked} />
+  )
 }
 
 export default ComponentProp

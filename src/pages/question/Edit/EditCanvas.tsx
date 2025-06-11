@@ -46,12 +46,13 @@ const EditCanvas: FC<propsType> = ({ loading }) => {
       {componentList
         .filter((cpn: componentInfoType) => !cpn.isHidden)
         .map((item: componentInfoType) => {
-          const { fe_id } = item
+          const { fe_id, isLocked } = item
 
           return (
             <div
               className={classNames(styles['component-wrapper'], {
                 [styles.selected]: selectedId === fe_id,
+                [styles.locked]: isLocked,
               })}
               key={fe_id}
               onClick={(e) => {
