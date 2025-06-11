@@ -1,4 +1,7 @@
-import type { componentInfoType } from '@/store/reducers/questionComponentsSlice'
+import type {
+  componentInfoType,
+  ComponentsStateType,
+} from '@/store/reducers/questionComponentsSlice'
 
 export const getNextSelectedId = (
   componentList: componentInfoType[],
@@ -24,4 +27,21 @@ export const getNextSelectedId = (
   }
 
   return componentDisplayList[curIndex + 1].fe_id
+}
+
+export const insertComponent = (
+  state: ComponentsStateType,
+  newComponent: componentInfoType,
+) => {
+  const { componentList, selectedId } = state
+
+  if (!selectedId) {
+    state.componentList = [...componentList, newComponent]
+  } else {
+    const index = componentList.findIndex((cpn) => cpn.fe_id === selectedId)
+    componentList.splice(index + 1, 0, newComponent)
+
+    state.componentList = [...componentList]
+    state.selectedId = newComponent.fe_id
+  }
 }

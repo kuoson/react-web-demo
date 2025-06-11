@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import type { componentInfoType } from '@/store/reducers/questionComponentsSlice'
 
 export const useGetComponentListInfo = () => {
-  const { componentList, selectedId } = useSelector(
+  const { componentList, selectedId, copiedComponent } = useSelector(
     (state) => state.questionComponents,
   )
 
@@ -10,5 +10,5 @@ export const useGetComponentListInfo = () => {
     componentList.find((cpn: componentInfoType) => cpn.fe_id === selectedId) ||
     {}
 
-  return { componentList, selectedId, selectedComponent }
+  return { componentList, selectedId, selectedComponent, copiedComponent }
 }

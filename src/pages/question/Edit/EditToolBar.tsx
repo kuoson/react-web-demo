@@ -5,6 +5,7 @@ import {
   EyeInvisibleOutlined,
   LockOutlined,
   CopyOutlined,
+  BlockOutlined,
 } from '@ant-design/icons'
 import { Button, Tooltip, Space } from 'antd'
 import {
@@ -12,11 +13,13 @@ import {
   hiddenComponent,
   toggleSelectedComponentLocked,
   copySelectedComponent,
+  pasteCopiedComponent,
 } from '@/store/reducers/questionComponentsSlice'
 import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
 
 const EditToolBar: FC = () => {
-  const { selectedId, selectedComponent } = useGetComponentListInfo()
+  const { selectedId, selectedComponent, copiedComponent } =
+    useGetComponentListInfo()
   const { isLocked } = selectedComponent
   const dispatch = useDispatch()
 
@@ -34,6 +37,10 @@ const EditToolBar: FC = () => {
 
   const handleCopy = () => {
     dispatch(copySelectedComponent())
+  }
+
+  const handlePaste = () => {
+    dispatch(pasteCopiedComponent())
   }
 
   return (
@@ -58,6 +65,14 @@ const EditToolBar: FC = () => {
       </Tooltip>
       <Tooltip title="复制">
         <Button shape="circle" icon={<CopyOutlined />} onClick={handleCopy} />
+      </Tooltip>
+      <Tooltip title="粘贴">
+        <Button
+          shape="circle"
+          icon={<BlockOutlined />}
+          disabled={!copiedComponent}
+          onClick={handlePaste}
+        />
       </Tooltip>
     </Space>
   )

@@ -1,7 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import cloneDeep from 'lodash.clonedeep'
+import { nanoid } from 'nanoid'
 import type { ComponentsPropsType } from '@/components/question'
-import { getNextSelectedId } from '@/utils/question'
+import { getNextSelectedId, insertComponent } from '@/utils/question'
 
 export type componentInfoType = {
   fe_id: string // 前端生成的 id, 服务端 mongodb 不认这种格式，所以自定义
@@ -42,17 +43,7 @@ export const questionComponentsSlice = createSlice({
       state: ComponentsStateType,
       action: PayloadAction<componentInfoType>,
     ) => {
-      const { componentList, selectedId } = state
-
-      if (!selectedId) {
-        state.componentList = [...componentList, action.payload]
-      } else {
-        const index = componentList.findIndex((cpn) => cpn.fe_id === selectedId)
-        componentList.splice(index + 1, 0, action.payload)
-
-        state.componentList = [...componentList]
-        state.selectedId = action.payload.fe_id
-      }
+      insertComponent(state, action.payload)
     },
 
     changeComponentProps: (
@@ -115,6 +106,16 @@ export const questionComponentsSlice = createSlice({
       const selectedCpn = componentList.find((cpn) => cpn.fe_id === selectedId)
       state.copiedComponent = cloneDeep(selectedCpn) || null
     },
+
+    pasteCopiedComponent: (state: ComponentsStateType) => {
+      const { copiedComponent } = state
+      if (!copiedComponent) {
+        return
+      }
+
+      copiedComponent.fe_id = nanoid()
+      insertComponent(state, copiedComponent)
+    },
   },
 })
 
@@ -127,6 +128,7 @@ export const {
   hiddenComponent,
   toggleSelectedComponentLocked,
   copySelectedComponent,
+  pasteCopiedComponent,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer
