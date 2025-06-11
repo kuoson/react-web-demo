@@ -16,6 +16,7 @@ import {
   pasteCopiedComponent,
 } from '@/store/reducers/questionComponentsSlice'
 import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
+import { useBindCanvasKeyPress } from '@/hooks/useBindCanvasKeyPress'
 
 const EditToolBar: FC = () => {
   const { selectedId, selectedComponent, copiedComponent } =
@@ -42,6 +43,8 @@ const EditToolBar: FC = () => {
   const handlePaste = () => {
     dispatch(pasteCopiedComponent())
   }
+
+  useBindCanvasKeyPress()
 
   return (
     <Space>
