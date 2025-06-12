@@ -2,11 +2,7 @@ import { useEffect, type FC } from 'react'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Form, Input, Select, Checkbox, Button, Space } from 'antd'
 import { nanoid } from 'nanoid'
-import {
-  type OptionType,
-  type QuestionRadioPropsType,
-  questionRadioDefaultProps,
-} from './type'
+import { type OptionType, type QuestionRadioPropsType } from './type'
 
 const PropsComponent: FC<QuestionRadioPropsType> = (
   props: QuestionRadioPropsType,
@@ -18,7 +14,7 @@ const PropsComponent: FC<QuestionRadioPropsType> = (
     value = '',
     disabled,
     onChange,
-  } = { ...questionRadioDefaultProps, ...props }
+  } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {
