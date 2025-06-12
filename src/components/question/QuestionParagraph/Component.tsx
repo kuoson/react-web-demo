@@ -13,7 +13,7 @@ const QuestionParagraph: FC<QuestionParagraphPropsType> = (
   return (
     <Paragraph style={{ textAlign: isCenter ? 'center' : 'left' }}>
       {textArr.map((t: string, index: number) => (
-        <span>
+        <span key={index}>
           {index > 0 && <br />}
           {t}
         </span>
