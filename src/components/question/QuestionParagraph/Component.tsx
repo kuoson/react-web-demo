@@ -8,7 +8,7 @@ const QuestionParagraph: FC<QuestionParagraphPropsType> = (
   props: QuestionParagraphPropsType,
 ) => {
   const { text = '一行段落', isCenter = false } = props
-  const textArr = text.split('\n')
+  const textArr = text.split('\n') // 插入 html 时，尽量不要使用 dangerouslySetInnerHTML，因为不安全
 
   return (
     <Paragraph style={{ textAlign: isCenter ? 'center' : 'left' }}>
