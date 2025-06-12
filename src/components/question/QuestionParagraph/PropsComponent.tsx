@@ -31,7 +31,7 @@ const PropsComponent: FC<QuestionParagraphPropsType> = (
       <Form.Item label="段落内容" name="text" rules={[{ required: true }]}>
         <TextArea />
       </Form.Item>
-      <Form.Item valuePropName="isCenter">
+      <Form.Item name="isCenter" valuePropName="checked">
         <Checkbox>居中显示</Checkbox>
       </Form.Item>
     </Form>
