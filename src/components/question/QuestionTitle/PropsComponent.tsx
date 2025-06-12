@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { Form, Input, Select, Checkbox } from 'antd'
 import type { QuestionTitlePropsType } from './type'
 
@@ -19,6 +19,10 @@ const PropsComponent: FC<QuestionTitlePropsType> = (
       onChange(form.getFieldsValue())
     }
   }
+
+  useEffect(() => {
+    form.setFieldsValue({ title, level, isCenter })
+  }, [title, level, isCenter])
 
   return (
     <Form

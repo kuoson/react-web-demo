@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { Form, Input, Checkbox } from 'antd'
 import type { QuestionParagraphPropsType } from './type'
 
@@ -15,6 +15,10 @@ const PropsComponent: FC<QuestionParagraphPropsType> = (
       onChange(form.getFieldsValue())
     }
   }
+
+  useEffect(() => {
+    form.setFieldsValue({ text, isCenter })
+  }, [text, isCenter])
 
   return (
     <Form

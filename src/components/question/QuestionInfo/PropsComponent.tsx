@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { Form, Input } from 'antd'
 import type { QuestionInfoPropsType } from './type'
 
@@ -15,6 +15,10 @@ const PropsComponent: FC<QuestionInfoPropsType> = (
       onChange(form.getFieldsValue())
     }
   }
+
+  useEffect(() => {
+    form.setFieldsValue({ title, desc })
+  }, [title, desc])
 
   return (
     <Form
