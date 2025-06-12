@@ -23,6 +23,7 @@ const PropsComponent: FC<QuestionInputPropsType> = (
   return (
     <Form
       form={form}
+      layout="vertical"
       initialValues={{ title, level, isCenter }}
       onValuesChange={handleValuesChange}
       disabled={disabled}
