@@ -1,5 +1,5 @@
 export type QuestionParagraphPropsType = {
-  text: string
+  text?: string
   isCenter?: boolean
   disabled?: boolean
   onChange?: (newProps: QuestionParagraphPropsType) => void
