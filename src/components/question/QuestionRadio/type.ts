@@ -6,7 +6,7 @@ export type OptionType = {
 export type QuestionRadioPropsType = {
   title?: string
   isVertical?: boolean
-  options: OptionType[]
+  options?: OptionType[]
   value?: string
   isCenter?: boolean
   disabled?: boolean
