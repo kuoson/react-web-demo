@@ -25,9 +25,12 @@ const componentConfList: ComponentsConfType[] = [
 export const componentConfGroup = [
   {
     groupName: '文本显示',
-    components: [QuestionTitleConf, QuestionParagraphConf],
+    components: [QuestionTitleConf],
   },
-  { groupName: '用户输入', components: [QuestionInputConf] },
+  {
+    groupName: '用户输入',
+    components: [QuestionInputConf, QuestionParagraphConf],
+  },
 ]
 
 export const getComponentConfByType = (type: string) =>
