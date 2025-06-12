@@ -8,12 +8,14 @@ import QuestionInfoConf, { type QuestionInfoPropsType } from './QuestionInfo'
 import QuestionTextareaConf, {
   type QuestionTextareaPropsType,
 } from './QuestionTextarea'
+import QuestionRadioConf, { type QuestionRadioPropsType } from './QuestionRadio'
 
 export type ComponentsPropsType = QuestionInputPropsType &
   QuestionTitlePropsType &
   QuestionParagraphPropsType &
   QuestionInfoPropsType &
-  QuestionTextareaPropsType
+  QuestionTextareaPropsType &
+  QuestionRadioPropsType
 
 export type ComponentsConfType = {
   title: string
@@ -28,16 +30,24 @@ const componentConfList: ComponentsConfType[] = [
   QuestionParagraphConf,
   QuestionInfoConf,
   QuestionTextareaConf,
+  QuestionRadioConf,
 ]
 
 export const componentConfGroup = [
   {
+    groupId: 'textGroup',
     groupName: '文本显示',
     components: [QuestionInfoConf, QuestionTitleConf, QuestionParagraphConf],
   },
   {
+    groupId: 'inputGroup',
     groupName: '用户输入',
     components: [QuestionInputConf, QuestionTextareaConf],
+  },
+  {
+    groupId: 'chooseGroup',
+    groupName: '用户选择',
+    components: [QuestionRadioConf],
   },
 ]
 
