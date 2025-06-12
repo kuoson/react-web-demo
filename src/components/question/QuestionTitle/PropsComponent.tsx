@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Form, Input } from 'antd'
+import { Form, Input, Select, Checkbox } from 'antd'
 import type { QuestionTitlePropsType } from './type'
 
 const PropsComponent: FC<QuestionTitlePropsType> = (
@@ -7,7 +7,8 @@ const PropsComponent: FC<QuestionTitlePropsType> = (
 ) => {
   const {
     title = '标题',
-    placeholder = 'placeholder',
+    level = 1,
+    isCenter = false,
     disabled,
     onChange,
   } = props
@@ -23,15 +24,24 @@ const PropsComponent: FC<QuestionTitlePropsType> = (
     <Form
       form={form}
       layout="vertical"
-      initialValues={{ title, placeholder }}
+      initialValues={{ title, level, isCenter }}
       onValuesChange={handleValuesChange}
       disabled={disabled}
     >
       <Form.Item label="标题内容" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="placeholder" name="placeholder">
-        <Input />
+      <Form.Item label="层级" name="level">
+        <Select
+          options={[
+            { value: 1, label: 1 },
+            { value: 2, label: 2 },
+            { value: 3, label: 3 },
+          ]}
+        />
+      </Form.Item>
+      <Form.Item valuePropName="isCenter">
+        <Checkbox>居中显示</Checkbox>
       </Form.Item>
     </Form>
   )

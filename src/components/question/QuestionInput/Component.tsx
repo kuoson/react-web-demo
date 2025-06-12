@@ -1,18 +1,19 @@
 import type { FC } from 'react'
-import { Typography } from 'antd'
+import { Typography, Input } from 'antd'
 import type { QuestionInputPropsType } from './type'
 
-const { Title } = Typography
+const { Paragraph } = Typography
 
 const QuestionInput: FC<QuestionInputPropsType> = (
   props: QuestionInputPropsType,
 ) => {
-  const { title = '标题', level = 1, isCenter = false } = props
+  const { title = '标题', placeholder = '请输入标题' } = props
 
   return (
-    <Title level={level} style={{ textAlign: isCenter ? 'center' : 'left' }}>
-      {title}
-    </Title>
+    <>
+      <Paragraph>{title}</Paragraph>
+      <Input placeholder={placeholder}></Input>
+    </>
   )
 }
 
