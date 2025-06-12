@@ -5,11 +5,15 @@ import QuestionParagraphConf, {
   type QuestionParagraphPropsType,
 } from './QuestionParagraph'
 import QuestionInfoConf, { type QuestionInfoPropsType } from './QuestionInfo'
+import QuestionTextareaConf, {
+  type QuestionTextareaPropsType,
+} from './QuestionTextarea'
 
 export type ComponentsPropsType = QuestionInputPropsType &
   QuestionTitlePropsType &
   QuestionParagraphPropsType &
-  QuestionInfoPropsType
+  QuestionInfoPropsType &
+  QuestionTextareaPropsType
 
 export type ComponentsConfType = {
   title: string
@@ -23,6 +27,7 @@ const componentConfList: ComponentsConfType[] = [
   QuestionTitleConf,
   QuestionParagraphConf,
   QuestionInfoConf,
+  QuestionTextareaConf,
 ]
 
 export const componentConfGroup = [
@@ -32,7 +37,7 @@ export const componentConfGroup = [
   },
   {
     groupName: '用户输入',
-    components: [QuestionInputConf],
+    components: [QuestionInputConf, QuestionTextareaConf],
   },
 ]
 
