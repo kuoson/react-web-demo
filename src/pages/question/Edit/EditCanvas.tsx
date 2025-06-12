@@ -28,7 +28,7 @@ const EditCanvas: FC<propsType> = ({ loading }) => {
   const dispatch = useDispatch()
   const { componentList, selectedId } = useGetComponentListInfo()
 
-  const handleClearSelectd = (e: MouseEvent, id: string) => {
+  const handleClearSelected = (e: MouseEvent, id: string) => {
     e.stopPropagation()
     dispatch(changeSelected(id))
   }
@@ -56,7 +56,7 @@ const EditCanvas: FC<propsType> = ({ loading }) => {
               })}
               key={fe_id}
               onClick={(e) => {
-                handleClearSelectd(e, fe_id)
+                handleClearSelected(e, fe_id)
               }}
             >
               <div className={styles.component}>{genComponent(item)}</div>
