@@ -4,10 +4,12 @@ import QuestionTitleConf, { type QuestionTitlePropsType } from './QuestionTitle'
 import QuestionParagraphConf, {
   type QuestionParagraphPropsType,
 } from './QuestionParagraph'
+import QuestionInfoConf, { type QuestionInfoPropsType } from './QuestionInfo'
 
 export type ComponentsPropsType = QuestionInputPropsType &
   QuestionTitlePropsType &
-  QuestionParagraphPropsType
+  QuestionParagraphPropsType &
+  QuestionInfoPropsType
 
 export type ComponentsConfType = {
   title: string
@@ -20,16 +22,17 @@ const componentConfList: ComponentsConfType[] = [
   QuestionInputConf,
   QuestionTitleConf,
   QuestionParagraphConf,
+  QuestionInfoConf,
 ]
 
 export const componentConfGroup = [
   {
     groupName: '文本显示',
-    components: [QuestionTitleConf],
+    components: [QuestionInfoConf, QuestionTitleConf, QuestionParagraphConf],
   },
   {
     groupName: '用户输入',
-    components: [QuestionInputConf, QuestionParagraphConf],
+    components: [QuestionInputConf],
   },
 ]
 
