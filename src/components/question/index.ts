@@ -26,6 +26,7 @@ export type ComponentsConfType = {
   type: string
   Component: FC<ComponentsPropsType>
   PropsComponent: FC<ComponentsPropsType>
+  defaultProps: ComponentsPropsType
 }
 
 const componentConfList: ComponentsConfType[] = [

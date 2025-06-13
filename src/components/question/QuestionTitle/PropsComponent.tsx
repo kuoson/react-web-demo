@@ -5,13 +5,7 @@ import type { QuestionTitlePropsType } from './type'
 const PropsComponent: FC<QuestionTitlePropsType> = (
   props: QuestionTitlePropsType,
 ) => {
-  const {
-    title = '标题',
-    level = 1,
-    isCenter = false,
-    disabled,
-    onChange,
-  } = props
+  const { title = '', level = 1, isCenter = false, disabled, onChange } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {

@@ -7,7 +7,7 @@ const { TextArea } = Input
 const PropsComponent: FC<QuestionParagraphPropsType> = (
   props: QuestionParagraphPropsType,
 ) => {
-  const { text = '一行段落', isCenter = false, disabled, onChange } = props
+  const { text = '', isCenter = false, disabled, onChange } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {

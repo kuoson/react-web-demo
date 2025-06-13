@@ -5,7 +5,7 @@ import { questionCheckboxDefaultProps } from './type'
 export * from './type'
 
 export default {
-  title: '多选标题',
+  title: '问卷多选',
   type: 'questionCheckbox',
   Component,
   PropsComponent,

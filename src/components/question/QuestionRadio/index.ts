@@ -5,7 +5,7 @@ import PropsComponent from './PropsComponent'
 export * from './type'
 
 export default {
-  title: '单选',
+  title: '问卷单选',
   type: 'questionRadio',
   Component,
   PropsComponent,

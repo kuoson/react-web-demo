@@ -5,12 +5,7 @@ import type { QuestionInputPropsType } from './type'
 const PropsComponent: FC<QuestionInputPropsType> = (
   props: QuestionInputPropsType,
 ) => {
-  const {
-    title = '标题',
-    placeholder = 'placeholder',
-    disabled,
-    onChange,
-  } = props
+  const { title = '', placeholder = '', disabled, onChange } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {

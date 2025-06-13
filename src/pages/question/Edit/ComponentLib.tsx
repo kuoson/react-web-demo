@@ -12,7 +12,7 @@ import styles from './ComponentLib.module.scss'
 const { Title } = Typography
 
 const GenComponent: FC<ComponentsConfType> = (props: ComponentsConfType) => {
-  const { Component, title, type } = props
+  const { Component, title, type, defaultProps } = props
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -21,6 +21,7 @@ const GenComponent: FC<ComponentsConfType> = (props: ComponentsConfType) => {
         fe_id: nanoid(),
         title,
         type,
+        props: defaultProps,
       }),
     )
   }

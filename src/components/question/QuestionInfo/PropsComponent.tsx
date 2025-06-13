@@ -7,7 +7,7 @@ const { TextArea } = Input
 const PropsComponent: FC<QuestionInfoPropsType> = (
   props: QuestionInfoPropsType,
 ) => {
-  const { title = '问卷标题', desc = '问卷描述', disabled, onChange } = props
+  const { title = '', desc = '', disabled, onChange } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {

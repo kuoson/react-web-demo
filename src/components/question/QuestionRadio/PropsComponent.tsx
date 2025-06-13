@@ -8,7 +8,7 @@ const PropsComponent: FC<QuestionRadioPropsType> = (
   props: QuestionRadioPropsType,
 ) => {
   const {
-    title = '标题',
+    title = '',
     isVertical = false,
     options = [],
     value = '',

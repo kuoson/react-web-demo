@@ -7,12 +7,7 @@ const { TextArea } = Input
 const PropsComponent: FC<QuestionTextareaPropsType> = (
   props: QuestionTextareaPropsType,
 ) => {
-  const {
-    title = '标题',
-    placeholder = 'placeholder',
-    disabled,
-    onChange,
-  } = props
+  const { title = '', placeholder = '', disabled, onChange } = props
   const [form] = Form.useForm()
 
   const handleValuesChange = () => {

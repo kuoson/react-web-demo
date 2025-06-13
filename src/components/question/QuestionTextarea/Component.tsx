@@ -1,6 +1,9 @@
 import type { FC } from 'react'
 import { Typography, Input } from 'antd'
-import type { QuestionTextareaPropsType } from './type'
+import {
+  type QuestionTextareaPropsType,
+  questionTextareaDefaultProps,
+} from './type'
 
 const { Paragraph } = Typography
 const { TextArea } = Input
@@ -8,7 +11,10 @@ const { TextArea } = Input
 const QuestionTextarea: FC<QuestionTextareaPropsType> = (
   props: QuestionTextareaPropsType,
 ) => {
-  const { title = '标题', placeholder = '请输入标题' } = props
+  const { title = '', placeholder = '' } = {
+    ...questionTextareaDefaultProps,
+    ...props,
+  }
 
   return (
     <>

@@ -5,3 +5,9 @@ export type QuestionTitlePropsType = {
   disabled?: boolean
   onChange?: (newProps: QuestionTitlePropsType) => void
 }
+
+export const questionTitleDefaultProps = {
+  title: '标题',
+  level: 1 as 1 | 2 | 3,
+  isCenter: false,
+}

@@ -1,13 +1,13 @@
 import type { FC } from 'react'
 import { Typography } from 'antd'
-import type { QuestionInfoPropsType } from './type'
+import { type QuestionInfoPropsType, questionInfoDefaultProps } from './type'
 
 const { Title, Paragraph } = Typography
 
 const QuestionInfo: FC<QuestionInfoPropsType> = (
   props: QuestionInfoPropsType,
 ) => {
-  const { title = '问卷标题', desc = '问卷描述' } = props
+  const { title = '', desc = '' } = { ...questionInfoDefaultProps, ...props }
   const descArr = desc.split('\n')
 
   return (

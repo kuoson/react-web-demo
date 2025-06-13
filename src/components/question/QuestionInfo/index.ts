@@ -1,3 +1,4 @@
+import { questionInfoDefaultProps } from './type'
 import Component from './Component'
 import PropsComponent from './PropsComponent'
 
@@ -8,4 +9,5 @@ export default {
   type: 'questionInfo',
   Component,
   PropsComponent,
+  defaultProps: questionInfoDefaultProps,
 }
