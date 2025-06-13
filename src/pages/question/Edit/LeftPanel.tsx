@@ -3,6 +3,7 @@ import { AppstoreAddOutlined, BarsOutlined } from '@ant-design/icons'
 import { Tabs } from 'antd'
 import type { TabsProps } from 'antd'
 import ComponentLib from './ComponentLib'
+import Layers from './Layers'
 
 const items: TabsProps['items'] = [
   {
@@ -14,7 +15,7 @@ const items: TabsProps['items'] = [
   {
     key: 'layers',
     label: '图层',
-    children: 'Content of Tab Pane 2',
+    children: <Layers />,
     icon: <BarsOutlined />,
   },
 ]
