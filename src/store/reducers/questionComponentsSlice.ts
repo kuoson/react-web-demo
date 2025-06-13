@@ -152,6 +152,22 @@ export const questionComponentsSlice = createSlice({
 
       state.selectedId = componentList[selectedIndex + 1].fe_id
     },
+
+    changeComponentTitle: (
+      state: ComponentsStateType,
+      action: PayloadAction<{ fe_id: string; newTitle: string }>,
+    ) => {
+      const { componentList } = state
+      const { fe_id, newTitle } = action.payload
+      state.componentList = componentList.map((c) => {
+        if (c.fe_id === fe_id) {
+          c.title = newTitle
+          return c
+        }
+
+        return c
+      })
+    },
   },
 })
 
@@ -167,6 +183,7 @@ export const {
   pasteCopiedComponent,
   selectPrevComponent,
   selectNextComponent,
+  changeComponentTitle,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer
