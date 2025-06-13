@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import cloneDeep from 'lodash.clonedeep'
 import { nanoid } from 'nanoid'
+import { arrayMove } from '@dnd-kit/sortable'
 import type { ComponentsPropsType } from '@/components/question'
 import { getNextSelectedId, insertComponent } from '@/utils/question'
 
@@ -173,6 +174,15 @@ export const questionComponentsSlice = createSlice({
         return c
       })
     },
+
+    moveComponent: (
+      state: ComponentsStateType,
+      action: PayloadAction<{ oldIndex: number; newIndex: number }>,
+    ) => {
+      const { componentList: curComponentList } = state
+      const { oldIndex, newIndex } = action.payload
+      state.componentList = arrayMove(curComponentList, oldIndex, newIndex)
+    },
   },
 })
 
@@ -189,6 +199,7 @@ export const {
   selectPrevComponent,
   selectNextComponent,
   changeComponentTitle,
+  moveComponent,
 } = questionComponentsSlice.actions
 
 export default questionComponentsSlice.reducer

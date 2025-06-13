@@ -2,10 +2,15 @@ import type { FC } from 'react'
 import { Spin } from 'antd'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
-import { changeSelected } from '@/store/reducers/questionComponentsSlice'
+import {
+  changeSelected,
+  moveComponent,
+  type componentInfoType,
+} from '@/store/reducers/questionComponentsSlice'
 import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import { getComponentConfByType } from '@/components/question/index'
-import type { componentInfoType } from '@/store/reducers/questionComponentsSlice'
+import SortableContainer from '@/components/dragSortable/SortableContainer'
+import SortableItem from '@/components/dragSortable/SortableItem'
 import styles from './EditCanvas.module.scss'
 
 type propsType = {
@@ -41,29 +46,41 @@ const EditCanvas: FC<propsType> = ({ loading }) => {
     )
   }
 
-  return (
-    <div className={styles.wrapper}>
-      {componentList
-        .filter((cpn: componentInfoType) => !cpn.isHidden)
-        .map((item: componentInfoType) => {
-          const { fe_id, isLocked } = item
+  const componentListWithId = componentList.map((c: componentInfoType) => ({
+    ...c,
+    id: c.fe_id,
+  }))
 
-          return (
-            <div
-              className={classNames(styles['component-wrapper'], {
-                [styles.selected]: selectedId === fe_id,
-                [styles.locked]: isLocked,
-              })}
-              key={fe_id}
-              onClick={(e) => {
-                handleClearSelected(e, fe_id)
-              }}
-            >
-              <div className={styles.component}>{genComponent(item)}</div>
-            </div>
-          )
-        })}
-    </div>
+  const handleDragEnd = (oldIndex: number, newIndex: number) => {
+    dispatch(moveComponent({ oldIndex, newIndex }))
+  }
+
+  return (
+    <SortableContainer items={componentListWithId} onDragEnd={handleDragEnd}>
+      <div className={styles.wrapper}>
+        {componentList
+          .filter((cpn: componentInfoType) => !cpn.isHidden)
+          .map((item: componentInfoType) => {
+            const { fe_id, isLocked } = item
+
+            return (
+              <SortableItem key={fe_id} id={fe_id}>
+                <div
+                  className={classNames(styles['component-wrapper'], {
+                    [styles.selected]: selectedId === fe_id,
+                    [styles.locked]: isLocked,
+                  })}
+                  onClick={(e) => {
+                    handleClearSelected(e, fe_id)
+                  }}
+                >
+                  <div className={styles.component}>{genComponent(item)}</div>
+                </div>
+              </SortableItem>
+            )
+          })}
+      </div>
+    </SortableContainer>
   )
 }
 
