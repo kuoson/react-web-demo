@@ -8,9 +8,9 @@ import {
   LIST_SEARCH_PARAM_PAGE_SIZE_KEY,
 } from '@/const'
 
-export const useLoadQuestionList = (
+export default function useLoadQuestionList(
   opt?: Partial<getQuestionListSearchParamsType>,
-) => {
+) {
   const [searchParams] = useSearchParams()
   const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
   const page = parseInt(searchParams.get(LIST_SEARCH_PARAM_CUR_PAGE_KEY) || '1')

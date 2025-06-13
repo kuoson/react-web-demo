@@ -6,7 +6,7 @@ import LeftPanel from './LeftPanel'
 import EditCanvas from './EditCanvas'
 import RightPanel from './RightPanel'
 import styles from './index.module.scss'
-import { useLoadQuestionData } from '@/hooks/useLoadQuestionData'
+import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 
 const Edit: FC = () => {
   const dispatch = useDispatch()

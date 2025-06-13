@@ -2,7 +2,7 @@ import { useEffect, useState, type FC } from 'react'
 import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'
 import { Tabs } from 'antd'
 import type { TabsProps } from 'antd'
-import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
+import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import ComponentProp from './ComponentProp'
 import PageSetting from './PageSetting'
 

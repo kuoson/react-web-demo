@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
 import { message, Input, Button, Space } from 'antd'
 import classNames from 'classnames'
-import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
+import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import {
   changeSelected,
   changeComponentTitle,

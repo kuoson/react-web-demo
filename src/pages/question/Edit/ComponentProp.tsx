@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { changeComponentProps } from '@/store/reducers/questionComponentsSlice'
-import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
+import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import {
   type ComponentsPropsType,
   getComponentConfByType,

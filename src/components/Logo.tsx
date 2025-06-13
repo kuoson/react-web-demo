@@ -2,7 +2,7 @@ import { type FC } from 'react'
 import { Link } from 'react-router-dom'
 import { FormOutlined } from '@ant-design/icons'
 import { Space } from 'antd'
-import { useNavStartPage } from '@/hooks/useNavStartPage'
+import useNavStartPage from '@/hooks/useNavStartPage'
 import styles from './Logo.module.scss'
 
 const Logo: FC = () => {

@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { Empty, Spin } from 'antd'
-import { useLoadQuestionList } from '@/hooks/useLoadQuestionList'
+import useLoadQuestionList from '@/hooks/useLoadQuestionList'
 import QuestionCard, { type PropsType } from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
 import ListPagination from '@/components/ListPagination'

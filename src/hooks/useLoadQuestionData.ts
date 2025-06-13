@@ -6,7 +6,7 @@ import { reqGetQuestionInfo } from '@/api/question'
 import { resetComponents } from '@/store/reducers/questionComponentsSlice'
 import { restPageInfo } from '@/store/reducers/pageInfoSlice'
 
-export const useLoadQuestionData = () => {
+export default function useLoadQuestionData() {
   const dispatch = useDispatch()
   const { id } = useParams()
 

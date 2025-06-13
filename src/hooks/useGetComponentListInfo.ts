@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import type { componentInfoType } from '@/store/reducers/questionComponentsSlice'
 
-export const useGetComponentListInfo = () => {
+export default function useGetComponentListInfo() {
   const { componentList, selectedId, copiedComponent } = useSelector(
     (state) => state.questionComponents,
   )

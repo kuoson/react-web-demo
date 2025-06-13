@@ -16,7 +16,7 @@ const isActiveElement = () => {
   return false
 }
 
-export const useBindCanvasKeyPress = () => {
+export default function useBindCanvasKeyPress() {
   const dispatch = useDispatch()
 
   useKeyPress(['backspace', 'delete'], () => {

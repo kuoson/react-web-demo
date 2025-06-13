@@ -15,8 +15,8 @@ import {
   copySelectedComponent,
   pasteCopiedComponent,
 } from '@/store/reducers/questionComponentsSlice'
-import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
-import { useBindCanvasKeyPress } from '@/hooks/useBindCanvasKeyPress'
+import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
+import useBindCanvasKeyPress from '@/hooks/useBindCanvasKeyPress'
 
 const EditToolBar: FC = () => {
   const { selectedId, selectedComponent, copiedComponent } =

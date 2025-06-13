@@ -6,7 +6,7 @@ import { Button, message, Space } from 'antd'
 import { LOGIN_PATHNAME } from '@/router/routes'
 import { removeToken } from '@/utils/userToken'
 import { logout } from '@/store/reducers/userSlice'
-import { useGetUserInfo } from '@/hooks/useGetUserInfo'
+import useGetUserInfo from '@/hooks/useGetUserInfo'
 
 const UserInfo: FC = () => {
   const nav = useNavigate()

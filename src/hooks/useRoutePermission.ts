@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { store, persistor } from '@/store'
 import { LOGIN_PATHNAME, HOME_PATHNAME } from '@/router/routes'
 
-export const useRoutePermission = () => {
+export default function useRoutePermission() {
   const nav = useNavigate()
   const { pathname } = useLocation()
   const [loading, setLoading] = useState(true)

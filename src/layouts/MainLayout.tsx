@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
-import { useRoutePermission } from '@/hooks/useRoutePermission'
+import useRoutePermission from '@/hooks/useRoutePermission'
 import Logo from '@/components/Logo'
 import UserInfo from '@/components/UserInfo'
 import styles from './MainLayout.module.scss'
