@@ -2,13 +2,14 @@ import { useState, type ChangeEvent, type FC } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { LeftOutlined, EditOutlined } from '@ant-design/icons'
-import { Button, Typography, Space, Input } from 'antd'
+import { Button, Typography, Space, Input, message } from 'antd'
 import { useRequest, useKeyPress, useDebounceEffect } from 'ahooks'
 import useGetPageInfo from '@/hooks/useGetPageInfo'
 import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import { changePageTitle } from '@/store/reducers/pageInfoSlice'
 import { reqUpdateQuestion } from '@/api/question'
 import EditToolBar from './EditToolBar'
+import { QUESTION_STAT_PATHNAME } from '@/router/routes'
 import styles from './EditHeader.module.scss'
 
 const { Title } = Typography
@@ -92,6 +93,38 @@ const SaveButton: FC = () => {
   )
 }
 
+const PublishButton: FC = () => {
+  const nav = useNavigate()
+  const { id } = useParams()
+  const pageInfo = useGetPageInfo()
+  const { componentList } = useGetComponentListInfo()
+
+  const { loading, run: pub } = useRequest(
+    async () => {
+      if (!id) return
+
+      await reqUpdateQuestion(id, {
+        ...pageInfo,
+        componentList,
+        isPublished: true,
+      })
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('发布成功')
+        nav(QUESTION_STAT_PATHNAME + '/' + id)
+      },
+    },
+  )
+
+  return (
+    <Button type="primary" loading={loading} onClick={pub}>
+      发布
+    </Button>
+  )
+}
+
 const EditHeader: FC = () => {
   const nav = useNavigate()
 
@@ -118,7 +151,7 @@ const EditHeader: FC = () => {
       <div className={styles.right}>
         <Space>
           <SaveButton />
-          <Button type="primary">发布</Button>
+          <PublishButton />
         </Space>
       </div>
     </div>
