@@ -11,7 +11,7 @@ import { Button, Tooltip, Space } from 'antd'
 import {
   removeSelectedComponent,
   hiddenComponent,
-  toggleSelectedComponentLocked,
+  toggleComponentLocked,
   copySelectedComponent,
   pasteCopiedComponent,
 } from '@/store/reducers/questionComponentsSlice'
@@ -29,11 +29,11 @@ const EditToolBar: FC = () => {
   }
 
   const handleHidden = () => {
-    dispatch(hiddenComponent({ id: selectedId, isHidden: true }))
+    dispatch(hiddenComponent({ fe_id: selectedId, isHidden: true }))
   }
 
   const handleLock = () => {
-    dispatch(toggleSelectedComponentLocked())
+    dispatch(toggleComponentLocked(selectedId))
   }
 
   const handleCopy = () => {

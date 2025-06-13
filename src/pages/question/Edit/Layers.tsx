@@ -8,7 +8,7 @@ import {
   changeSelected,
   changeComponentTitle,
   hiddenComponent,
-  toggleSelectedComponentLocked,
+  toggleComponentLocked,
 } from '@/store/reducers/questionComponentsSlice'
 import type { componentInfoType } from '@/store/reducers/questionComponentsSlice'
 import styles from './Layers.module.scss'
@@ -46,11 +46,11 @@ const Layers: FC = () => {
   }
 
   const handleChangeHidden = (fe_id: string, isHidden: boolean) => {
-    dispatch(hiddenComponent({ id: fe_id, isHidden }))
+    dispatch(hiddenComponent({ fe_id, isHidden }))
   }
 
-  const handleToggleLocked = () => {
-    dispatch(toggleSelectedComponentLocked())
+  const handleToggleLocked = (fe_id: string) => {
+    dispatch(toggleComponentLocked(fe_id))
   }
 
   return (
@@ -101,7 +101,7 @@ const Layers: FC = () => {
                   shape="circle"
                   icon={<LockOutlined />}
                   type={isLocked ? 'primary' : 'text'}
-                  onClick={handleToggleLocked}
+                  onClick={() => handleToggleLocked(fe_id)}
                 />
               </Space>
             </div>

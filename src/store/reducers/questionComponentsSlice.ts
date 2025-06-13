@@ -71,32 +71,37 @@ export const questionComponentsSlice = createSlice({
 
     hiddenComponent: (
       state: ComponentsStateType,
-      action: PayloadAction<{ id: string; isHidden: boolean }>,
+      action: PayloadAction<{ fe_id: string; isHidden: boolean }>,
     ) => {
       const { componentList } = state
-      const { id, isHidden } = action.payload
+      const { fe_id, isHidden } = action.payload
 
-      if (!id) {
+      if (!fe_id) {
         return
       }
 
-      const nextSelectedId = getNextSelectedId(componentList, id)
+      const nextSelectedId = getNextSelectedId(componentList, fe_id)
       state.componentList = componentList.map((cpn) =>
-        cpn.fe_id === id ? { ...cpn, isHidden } : cpn,
+        cpn.fe_id === fe_id ? { ...cpn, isHidden } : cpn,
       )
 
       if (isHidden) {
         state.selectedId = nextSelectedId
       } else {
-        state.selectedId = id
+        state.selectedId = fe_id
       }
     },
 
-    toggleSelectedComponentLocked: (state: ComponentsStateType) => {
-      const { componentList, selectedId } = state
+    toggleComponentLocked: (
+      state: ComponentsStateType,
+      action: PayloadAction<string>,
+    ) => {
+      const { componentList } = state
 
       state.componentList = componentList.map((cpn) =>
-        cpn.fe_id === selectedId ? { ...cpn, isLocked: !cpn.isLocked } : cpn,
+        cpn.fe_id === action.payload
+          ? { ...cpn, isLocked: !cpn.isLocked }
+          : cpn,
       )
     },
 
@@ -178,7 +183,7 @@ export const {
   changeComponentProps,
   removeSelectedComponent,
   hiddenComponent,
-  toggleSelectedComponentLocked,
+  toggleComponentLocked,
   copySelectedComponent,
   pasteCopiedComponent,
   selectPrevComponent,
