@@ -6,6 +6,8 @@ import {
   LockOutlined,
   CopyOutlined,
   BlockOutlined,
+  UpOutlined,
+  DownOutlined,
 } from '@ant-design/icons'
 import { Button, Tooltip, Space } from 'antd'
 import {
@@ -14,12 +16,14 @@ import {
   toggleComponentLocked,
   copySelectedComponent,
   pasteCopiedComponent,
+  moveComponent,
+  type componentInfoType,
 } from '@/store/reducers/questionComponentsSlice'
 import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import useBindCanvasKeyPress from '@/hooks/useBindCanvasKeyPress'
 
 const EditToolBar: FC = () => {
-  const { selectedId, selectedComponent, copiedComponent } =
+  const { selectedId, selectedComponent, componentList, copiedComponent } =
     useGetComponentListInfo()
   const { isLocked } = selectedComponent
   const dispatch = useDispatch()
@@ -42,6 +46,28 @@ const EditToolBar: FC = () => {
 
   const handlePaste = () => {
     dispatch(pasteCopiedComponent())
+  }
+
+  const selectIndex = componentList.findIndex(
+    (c: componentInfoType) => c.fe_id === selectedId,
+  )
+  const isFirst = selectIndex <= 0
+  const isLast = selectIndex + 1 === componentList.length
+
+  const handleMoveUp = () => {
+    if (isFirst) return
+
+    dispatch(
+      moveComponent({ oldIndex: selectIndex, newIndex: selectIndex - 1 }),
+    )
+  }
+
+  const handleMoveDown = () => {
+    if (isLast) return
+
+    dispatch(
+      moveComponent({ oldIndex: selectIndex, newIndex: selectIndex + 1 }),
+    )
   }
 
   useBindCanvasKeyPress()
@@ -75,6 +101,22 @@ const EditToolBar: FC = () => {
           icon={<BlockOutlined />}
           disabled={!copiedComponent}
           onClick={handlePaste}
+        />
+      </Tooltip>
+      <Tooltip title="上移">
+        <Button
+          shape="circle"
+          icon={<UpOutlined />}
+          disabled={isFirst}
+          onClick={handleMoveUp}
+        />
+      </Tooltip>
+      <Tooltip title="下移">
+        <Button
+          shape="circle"
+          icon={<DownOutlined />}
+          disabled={isLast}
+          onClick={handleMoveDown}
         />
       </Tooltip>
     </Space>
