@@ -15,5 +15,17 @@
   .handler {
     width: 50px;
     text-align: end;
+
+    .btn {
+      opacity: 0.2;
+    }
+  }
+
+  &:hover {
+    .handler {
+      .btn {
+        opacity: 1;
+      }
+    }
   }
 }

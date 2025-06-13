@@ -1,11 +1,14 @@
 import { useState, type ChangeEvent, type FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { message, Input } from 'antd'
+import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
+import { message, Input, Button, Space } from 'antd'
 import classNames from 'classnames'
 import { useGetComponentListInfo } from '@/hooks/useGetComponentListInfo'
 import {
   changeSelected,
   changeComponentTitle,
+  hiddenComponent,
+  toggleSelectedComponentLocked,
 } from '@/store/reducers/questionComponentsSlice'
 import type { componentInfoType } from '@/store/reducers/questionComponentsSlice'
 import styles from './Layers.module.scss'
@@ -42,10 +45,18 @@ const Layers: FC = () => {
     dispatch(changeComponentTitle({ fe_id: selectedId, newTitle }))
   }
 
+  const handleChangeHidden = (fe_id: string, isHidden: boolean) => {
+    dispatch(hiddenComponent({ id: fe_id, isHidden }))
+  }
+
+  const handleToggleLocked = () => {
+    dispatch(toggleSelectedComponentLocked())
+  }
+
   return (
     <>
       {componentList.map((c: componentInfoType) => {
-        const { fe_id, title } = c
+        const { fe_id, title, isHidden, isLocked } = c
 
         const titleDefaultClassName = styles.title
         const selectedClassName = styles.selected
@@ -74,7 +85,26 @@ const Layers: FC = () => {
               )}
               {fe_id !== changingTitleId && title}
             </div>
-            <div className={styles.handler}>按钮</div>
+            <div className={styles.handler}>
+              <Space>
+                <Button
+                  className={!isHidden ? styles.btn : ''}
+                  size="small"
+                  shape="circle"
+                  icon={<EyeInvisibleOutlined />}
+                  type={isHidden ? 'primary' : 'text'}
+                  onClick={() => handleChangeHidden(fe_id, !isHidden)}
+                />
+                <Button
+                  className={!isLocked ? styles.btn : ''}
+                  size="small"
+                  shape="circle"
+                  icon={<LockOutlined />}
+                  type={isLocked ? 'primary' : 'text'}
+                  onClick={handleToggleLocked}
+                />
+              </Space>
+            </div>
           </div>
         )
       })}
