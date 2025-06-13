@@ -4,10 +4,12 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import userSlice from './reducers/userSlice'
 import questionComponentsSlice from './reducers/questionComponentsSlice'
+import pageInfoSlice from './reducers/pageInfoSlice'
 
 const rootReducer = combineReducers({
   user: userSlice,
   questionComponents: questionComponentsSlice,
+  pageInfo: pageInfoSlice,
 })
 
 const persistConfig = {

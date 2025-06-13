@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useRequest } from 'ahooks'
 import { reqGetQuestionInfo } from '@/api/question'
 import { resetComponents } from '@/store/reducers/questionComponentsSlice'
+import { restPageInfo } from '@/store/reducers/pageInfoSlice'
 
 export const useLoadQuestionData = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,19 @@ export const useLoadQuestionData = () => {
     {
       manual: true,
       onSuccess: (resData) => {
-        const { componentList } = resData
+        const { componentList, title, desc, js, css } = resData
         let selectedId: string = ''
         if (componentList.length > 0) {
           selectedId = componentList[0].fe_id
         }
-        dispatch(resetComponents({ componentList, selectedId }))
+        dispatch(
+          resetComponents({
+            componentList,
+            selectedId,
+            copiedComponent: null,
+          }),
+        )
+        dispatch(restPageInfo({ title, desc, js, css }))
       },
     },
   )
