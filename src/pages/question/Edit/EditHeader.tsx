@@ -1,10 +1,13 @@
 import { useState, type ChangeEvent, type FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { LeftOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Typography, Space, Input } from 'antd'
+import { useRequest, useKeyPress } from 'ahooks'
 import useGetPageInfo from '@/hooks/useGetPageInfo'
+import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import { changePageTitle } from '@/store/reducers/pageInfoSlice'
+import { reqUpdateQuestion } from '@/api/question'
 import EditToolBar from './EditToolBar'
 import styles from './EditHeader.module.scss'
 
@@ -53,6 +56,32 @@ const TitleElem: FC = () => {
   )
 }
 
+const SaveButton: FC = () => {
+  const { id } = useParams()
+  const pageInfo = useGetPageInfo()
+  const componentList = useGetComponentListInfo()
+
+  const { loading, run: save } = useRequest(
+    async () => {
+      if (!id) return
+
+      await reqUpdateQuestion(id, { ...pageInfo, componentList })
+    },
+    { manual: true },
+  )
+
+  useKeyPress(['ctrl.s', 'meta.s'], (event: KeyboardEvent) => {
+    event.preventDefault()
+    if (!loading) save()
+  })
+
+  return (
+    <Button loading={loading} onClick={save}>
+      保存
+    </Button>
+  )
+}
+
 const EditHeader: FC = () => {
   const nav = useNavigate()
 
@@ -78,7 +107,7 @@ const EditHeader: FC = () => {
       </div>
       <div className={styles.right}>
         <Space>
-          <Button>保存</Button>
+          <SaveButton />
           <Button type="primary">发布</Button>
         </Space>
       </div>
