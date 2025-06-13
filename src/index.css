@@ -16,3 +16,8 @@
   background: rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+/* dnd-kit 拖拽排序样式重载 */
+div[role='button'] {
+  outline: 0;
+}

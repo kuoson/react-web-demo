@@ -9,9 +9,9 @@ import {
 } from '@/store/reducers/questionComponentsSlice'
 
 const isActiveElement = () => {
-  if (document.activeElement === document.body) {
-    return true
-  }
+  const activeElem = document.activeElement
+  if (activeElem === document.body) return true
+  if (activeElem?.matches('div[role="button"]')) return true
 
   return false
 }
