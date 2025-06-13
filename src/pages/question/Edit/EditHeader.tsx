@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { LeftOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Typography, Space, Input } from 'antd'
-import { useRequest, useKeyPress } from 'ahooks'
+import { useRequest, useKeyPress, useDebounceEffect } from 'ahooks'
 import useGetPageInfo from '@/hooks/useGetPageInfo'
 import useGetComponentListInfo from '@/hooks/useGetComponentListInfo'
 import { changePageTitle } from '@/store/reducers/pageInfoSlice'
@@ -59,7 +59,7 @@ const TitleElem: FC = () => {
 const SaveButton: FC = () => {
   const { id } = useParams()
   const pageInfo = useGetPageInfo()
-  const componentList = useGetComponentListInfo()
+  const { componentList } = useGetComponentListInfo()
 
   const { loading, run: save } = useRequest(
     async () => {
@@ -74,6 +74,16 @@ const SaveButton: FC = () => {
     event.preventDefault()
     if (!loading) save()
   })
+
+  useDebounceEffect(
+    () => {
+      save()
+    },
+    [pageInfo, componentList],
+    {
+      wait: 1000,
+    },
+  )
 
   return (
     <Button loading={loading} onClick={save}>
