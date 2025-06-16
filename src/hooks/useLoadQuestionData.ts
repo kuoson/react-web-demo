@@ -21,7 +21,7 @@ export default function useLoadQuestionData() {
     {
       manual: true,
       onSuccess: (resData) => {
-        const { componentList, title, desc, js, css } = resData
+        const { componentList, title, isPublished, desc, js, css } = resData
         let selectedId: string = ''
         if (componentList.length > 0) {
           selectedId = componentList[0].fe_id
@@ -33,7 +33,7 @@ export default function useLoadQuestionData() {
             copiedComponent: null,
           }),
         )
-        dispatch(restPageInfo({ title, desc, js, css }))
+        dispatch(restPageInfo({ title, isPublished, desc, js, css }))
       },
     },
   )

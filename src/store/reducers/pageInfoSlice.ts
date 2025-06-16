@@ -6,6 +6,7 @@ export type pageInfoType = {
   desc?: string
   js?: string
   css?: string
+  isPublished: boolean
 }
 
 const INIT_STATE: pageInfoType = { title: '', desc: '', js: '', css: '' }
