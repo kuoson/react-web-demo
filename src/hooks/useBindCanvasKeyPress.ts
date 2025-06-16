@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useKeyPress } from 'ahooks'
+import { ActionCreators } from 'redux-undo'
 import {
   removeSelectedComponent,
   copySelectedComponent,
@@ -57,5 +58,27 @@ export default function useBindCanvasKeyPress() {
     }
 
     dispatch(selectNextComponent())
+  })
+
+  useKeyPress(
+    ['ctrl.z', 'meta.z'],
+    () => {
+      if (!isActiveElement()) {
+        return
+      }
+
+      dispatch(ActionCreators.undo())
+    },
+    {
+      exactMatch: true,
+    },
+  )
+
+  useKeyPress(['ctrl.shift.y', 'ctrl.shift.y'], () => {
+    if (!isActiveElement()) {
+      return
+    }
+
+    dispatch(ActionCreators.redo())
   })
 }

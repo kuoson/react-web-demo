@@ -8,8 +8,11 @@ import {
   BlockOutlined,
   UpOutlined,
   DownOutlined,
+  UndoOutlined,
+  RedoOutlined,
 } from '@ant-design/icons'
 import { Button, Tooltip, Space } from 'antd'
+import { ActionCreators } from 'redux-undo'
 import {
   removeSelectedComponent,
   hiddenComponent,
@@ -70,6 +73,14 @@ const EditToolBar: FC = () => {
     )
   }
 
+  const handleUndo = () => {
+    dispatch(ActionCreators.undo())
+  }
+
+  const handleRedo = () => {
+    dispatch(ActionCreators.redo())
+  }
+
   useBindCanvasKeyPress()
 
   return (
@@ -118,6 +129,12 @@ const EditToolBar: FC = () => {
           disabled={isLast}
           onClick={handleMoveDown}
         />
+      </Tooltip>
+      <Tooltip title="撤销">
+        <Button shape="circle" icon={<UndoOutlined />} onClick={handleUndo} />
+      </Tooltip>
+      <Tooltip title="重做">
+        <Button shape="circle" icon={<RedoOutlined />} onClick={handleRedo} />
       </Tooltip>
     </Space>
   )
