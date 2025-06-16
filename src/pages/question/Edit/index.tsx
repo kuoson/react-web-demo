@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { useDispatch } from 'react-redux'
+import { useTitle } from 'ahooks'
 import { changeSelected } from '@/store/reducers/questionComponentsSlice'
 import EditHeader from './EditHeader'
 import LeftPanel from './LeftPanel'
@@ -7,10 +8,13 @@ import EditCanvas from './EditCanvas'
 import RightPanel from './RightPanel'
 import styles from './index.module.scss'
 import useLoadQuestionData from '@/hooks/useLoadQuestionData'
+import useGetPageInfo from '@/hooks/useGetPageInfo'
 
 const Edit: FC = () => {
   const dispatch = useDispatch()
   const { loading } = useLoadQuestionData()
+  const { title } = useGetPageInfo()
+  useTitle(`问卷编辑- ${title}`)
 
   const handleClick = () => {
     dispatch(changeSelected(''))
