@@ -3,7 +3,7 @@ import type { componentInfoType } from '@/store/reducers/questionComponentsSlice
 
 export default function useGetComponentListInfo() {
   const { componentList, selectedId, copiedComponent } = useSelector(
-    (state) => state.questionComponents,
+    (state) => state.questionComponents.present,
   )
 
   const selectedComponent =
