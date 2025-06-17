@@ -8,3 +8,6 @@ export const reqGetQuestionStatList = (
     pageSize: number
   },
 ) => request.get<any, ResDataType>(`/api/stat/${id}`, { params })
+
+export const reqGetComponentStat = (questionId: string, componentId: string) =>
+  request.get<any, ResDataType>(`/api/stat/${questionId}/${componentId}`)

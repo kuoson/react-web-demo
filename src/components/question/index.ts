@@ -8,9 +8,13 @@ import QuestionInfoConf, { type QuestionInfoPropsType } from './QuestionInfo'
 import QuestionTextareaConf, {
   type QuestionTextareaPropsType,
 } from './QuestionTextarea'
-import QuestionRadioConf, { type QuestionRadioPropsType } from './QuestionRadio'
+import QuestionRadioConf, {
+  type QuestionRadioPropsType,
+  type QuestionRadioStatPropsType,
+} from './QuestionRadio'
 import QuestionCheckboxConf, {
   type QuestionCheckboxPropsType,
+  type QuestionCheckboxStatPropsType,
 } from './QuestionCheckbox'
 
 export type ComponentsPropsType = QuestionInputPropsType &
@@ -21,11 +25,15 @@ export type ComponentsPropsType = QuestionInputPropsType &
   QuestionRadioPropsType &
   QuestionCheckboxPropsType
 
+export type StatComponentPropsType = QuestionRadioStatPropsType &
+  QuestionCheckboxStatPropsType
+
 export type ComponentsConfType = {
   title: string
   type: string
   Component: FC<ComponentsPropsType>
   PropsComponent: FC<ComponentsPropsType>
+  StatComponent?: FC<StatComponentPropsType>
   defaultProps: ComponentsPropsType
 }
 

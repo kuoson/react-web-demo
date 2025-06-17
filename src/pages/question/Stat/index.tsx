@@ -7,6 +7,7 @@ import useGetPageInfo from '@/hooks/useGetPageInfo'
 import StatHeader from './StatHeader'
 import ComponentList from './ComponentList'
 import StatTable from './StatTable'
+import StatChart from './StatChart'
 import styles from './index.module.scss'
 
 const Stat: FC = () => {
@@ -17,7 +18,6 @@ const Stat: FC = () => {
 
   const [selectedComponentId, setSelectedComponentId] = useState('')
   const [selectedComponentType, setSelectedComponentType] = useState('')
-  console.log(selectedComponentType)
 
   if (loading) {
     return (
@@ -62,7 +62,12 @@ const Stat: FC = () => {
               onSetSelectedComponentType={setSelectedComponentType}
             />
           </div>
-          <div className={styles.right}>right</div>
+          <div className={styles.right}>
+            <StatChart
+              selectedComponentId={selectedComponentId}
+              selectedComponentType={selectedComponentType}
+            />
+          </div>
         </div>
       </div>
     </div>
