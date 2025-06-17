@@ -1,10 +1,11 @@
-import type { FC } from 'react'
+import { useState, type FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Spin, Button, Result } from 'antd'
 import { useTitle } from 'ahooks'
 import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import useGetPageInfo from '@/hooks/useGetPageInfo'
 import StatHeader from './StatHeader'
+import ComponentList from './ComponentList'
 import styles from './index.module.scss'
 
 const Stat: FC = () => {
@@ -12,6 +13,10 @@ const Stat: FC = () => {
   const { isPublished, title } = useGetPageInfo()
   const nav = useNavigate()
   useTitle(`问卷统计 - ${title}`)
+
+  const [selectedComponentId, setSelectedComponentId] = useState('')
+  const [selectedComponentType, setSelectedComponentType] = useState('')
+  console.log(selectedComponentType)
 
   if (loading) {
     return (
@@ -42,7 +47,13 @@ const Stat: FC = () => {
       </div>
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
-          <div className={styles.left}>left</div>
+          <div className={styles.left}>
+            <ComponentList
+              selectedComponentId={selectedComponentId}
+              onSetSelectedComponentId={setSelectedComponentId}
+              onSetSelectedComponentType={setSelectedComponentType}
+            />
+          </div>
           <div className={styles.main}>content</div>
           <div className={styles.right}>right</div>
         </div>
