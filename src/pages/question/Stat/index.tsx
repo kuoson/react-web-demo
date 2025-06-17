@@ -4,6 +4,7 @@ import { Spin, Button, Result } from 'antd'
 import { useTitle } from 'ahooks'
 import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import useGetPageInfo from '@/hooks/useGetPageInfo'
+import StatHeader from './StatHeader'
 import styles from './index.module.scss'
 
 const Stat: FC = () => {
@@ -36,7 +37,9 @@ const Stat: FC = () => {
 
   return (
     <div className={styles.container}>
-      <div>Header</div>
+      <div>
+        <StatHeader />
+      </div>
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
           <div className={styles.left}>left</div>
