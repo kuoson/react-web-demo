@@ -6,6 +6,7 @@ import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import useGetPageInfo from '@/hooks/useGetPageInfo'
 import StatHeader from './StatHeader'
 import ComponentList from './ComponentList'
+import StatTable from './StatTable'
 import styles from './index.module.scss'
 
 const Stat: FC = () => {
@@ -54,7 +55,13 @@ const Stat: FC = () => {
               onSetSelectedComponentType={setSelectedComponentType}
             />
           </div>
-          <div className={styles.main}>content</div>
+          <div className={styles.main}>
+            <StatTable
+              selectedComponentId={selectedComponentId}
+              onSetSelectedComponentId={setSelectedComponentId}
+              onSetSelectedComponentType={setSelectedComponentType}
+            />
+          </div>
           <div className={styles.right}>right</div>
         </div>
       </div>
