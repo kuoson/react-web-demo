@@ -1,3 +1,4 @@
+import { lazy } from 'react'
 import type { Route } from './routesType'
 import MainLayout from '@/layouts/MainLayout'
 import ManageLayout from '@/layouts/ManageLayout'
@@ -12,8 +13,11 @@ import List from '@/pages/manage/List'
 import Star from '@/pages/manage/Star'
 import Trash from '@/pages/manage/Trash'
 
-import Edit from '@/pages/question/Edit'
-import Stat from '@/pages/question/Stat'
+// vite基于 Rollup 打包，无法使用魔法注释命名块
+const Edit = () =>
+  lazy(() => import(/* webpackChunkName: "editPage" */ '@/pages/question/Edit'))
+const Stat = () =>
+  lazy(() => import(/* webpackChunkName: "statPage" */ '@/pages/question/Stat'))
 
 const getPathSegment = (path: string, index: number) => {
   if (path === '/') {
